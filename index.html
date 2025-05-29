@@ -10,7 +10,8 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="js/crm.js" defer></script>
+    <script src="Js/Script.js" defer></script>
+    <script src="Js/crm.js" defer></script>
   </head>
 
   <body>
@@ -294,334 +295,347 @@
       <!--CRM SECTION-->
       <div
         id="crmSection"
-        class="content-section main-content"
+        class="content-section main-content crm-dashboard"
         style="display: none"
       >
         <div class="dairy-banner">
           <h1>Customer Relationship Management</h1>
+          <p>Manage your customer relationships and track purchase history</p>
         </div>
 
-        <!-- Customer Management -->
-        <section class="crm-section">
-          <div class="section-header">
-            <h3>Customer Management</h3>
-            <button class="btn btn-primary" id="addFarmerBtn">
-              Add New Customer
+        <!-- CRM Dashboard Cards -->
+        <div class="crm-stats-container">
+          <div class="crm-stat-card">
+            <div class="crm-stat-icon"><i class="fas fa-users"></i></div>
+            <div class="crm-stat-info">
+              <h3>Total Customers</h3>
+              <p class="crm-stat-value">1,250</p>
+              <p class="crm-stat-change positive">
+                <i class="fas fa-arrow-up"></i> 12% this month
+              </p>
+            </div>
+          </div>
+
+          <div class="crm-stat-card">
+            <div class="crm-stat-icon"><i class="fas fa-user-plus"></i></div>
+            <div class="crm-stat-info">
+              <h3>New Customers</h3>
+              <p class="crm-stat-value">78</p>
+              <p class="crm-stat-change positive">
+                <i class="fas fa-arrow-up"></i> 8% this month
+              </p>
+            </div>
+          </div>
+
+          <div class="crm-stat-card">
+            <div class="crm-stat-icon">
+              <i class="fas fa-shopping-cart"></i>
+            </div>
+            <div class="crm-stat-info">
+              <h3>Total Orders</h3>
+              <p class="crm-stat-value">3,842</p>
+              <p class="crm-stat-change positive">
+                <i class="fas fa-arrow-up"></i> 15% this month
+              </p>
+            </div>
+          </div>
+
+          <div class="crm-stat-card">
+            <div class="crm-stat-icon"><i class="fas fa-rupee-sign"></i></div>
+            <div class="crm-stat-info">
+              <h3>Revenue</h3>
+              <p class="crm-stat-value">₹8.2L</p>
+              <p class="crm-stat-change positive">
+                <i class="fas fa-arrow-up"></i> 18% this month
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Customer Management Section -->
+        <div class="crm-section-container">
+          <div class="crm-section-header">
+            <h2>Customer Management</h2>
+            <button id="addCustomerBtn" class="crm-btn crm-btn-primary">
+              <i class="fas fa-plus"></i> Add New Customer
             </button>
           </div>
-          <div class="table-responsive">
-            <table class="crm-table" id="farmersTable">
+
+          <!-- Search and Filter Bar -->
+          <div class="crm-search-filter-container">
+            <div class="crm-search-box">
+              <i class="fas fa-search"></i>
+              <input
+                type="text"
+                id="customerSearchInput"
+                placeholder="Search customers..."
+              />
+            </div>
+
+            <div class="crm-filter-container">
+              <select id="customerTypeFilter" class="crm-filter-select">
+                <option value="all">All Customer Types</option>
+                <option value="retail">Retail</option>
+                <option value="wholesale">Wholesale</option>
+                <option value="distributor">Distributor</option>
+              </select>
+
+              <select id="customerStatusFilter" class="crm-filter-select">
+                <option value="all">All Statuses</option>
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
+                <option value="new">New</option>
+              </select>
+
+              <button id="resetFiltersBtn" class="crm-btn crm-btn-secondary">
+                <i class="fas fa-sync-alt"></i> Reset
+              </button>
+            </div>
+          </div>
+
+          <!-- Customer Table -->
+          <div class="crm-table-container">
+            <table class="crm-customer-table" id="customerTable">
               <thead>
                 <tr>
-                  <th>ID</th>
-                  <th>Name</th>
+                  <th>Customer ID</th>
+                  <th>Customer Name</th>
+                  <th>Contact Number</th>
+                  <th>Type</th>
                   <th>Location</th>
-                  <th>Contact</th>
-                  <th>Cattle Count</th>
-                  <th>Avg. Daily Supply</th>
-                  <th>Quality Rating</th>
+                  <th>Last Order</th>
+                  <th>Status</th>
                   <th>Actions</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td>1001</td>
-                  <td>Rajesh Kumar</td>
-                  <td>Coimbatore, TN</td>
-                  <td>+91 9876543210</td>
-                  <td>24</td>
-                  <td>85 L/day</td>
-                  <td><span class="rating excellent">4.8/5</span></td>
-                  <td>
-                    <button class="btn-icon">
-                      <i class="fas fa-phone"></i>
-                    </button>
-                    <button class="btn-icon">
-                      <i class="fas fa-envelope"></i>
-                    </button>
-                    <button class="btn-icon delete-farmer-btn">
-                      <i class="fas fa-trash"></i>
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>1002</td>
-                  <td>Anita Devi</td>
-                  <td>Chittoor, AP</td>
-                  <td>+91 9123456780</td>
-                  <td>18</td>
-                  <td>62 L/day</td>
-                  <td><span class="rating good">4.2/5</span></td>
-                  <td>
-                    <button class="btn-icon">
-                      <i class="fas fa-phone"></i>
-                    </button>
-                    <button class="btn-icon">
-                      <i class="fas fa-envelope"></i>
-                    </button>
-                    <button class="btn-icon delete-farmer-btn">
-                      <i class="fas fa-trash"></i>
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>1003</td>
-                  <td>Mohammed Arif</td>
-                  <td>Mysuru, KA</td>
-                  <td>+91 9898989898</td>
-                  <td>32</td>
-                  <td>105 L/day</td>
-                  <td><span class="rating excellent">4.9/5</span></td>
-                  <td>
-                    <button class="btn-icon">
-                      <i class="fas fa-phone"></i>
-                    </button>
-                    <button class="btn-icon">
-                      <i class="fas fa-envelope"></i>
-                    </button>
-                    <button class="btn-icon delete-farmer-btn">
-                      <i class="fas fa-trash"></i>
-                    </button>
-                  </td>
-                </tr>
+              <tbody id="customerTableBody">
+                <!-- Customer rows will be populated by JavaScript -->
               </tbody>
             </table>
-          </div>
-        </section>
 
-        <!-- Add Customer Management Form Modal -->
-        <div id="farmerModal" class="modal">
-          <div class="modal-content">
-            <span class="close">&times;</span>
-            <h3>Add New Customer</h3>
-            <form id="farmerForm">
-              <div class="form-group">
-                <label for="name">Name:</label>
-                <input
-                  type="text"
-                  id="name"
-                  pattern="[A-Za-z]+"
-                  title="Only alphabets allowed (no spaces or numbers)"
-                  required
-                />
-                <span class="validation-error" id="name-error"></span>
-              </div>
-              <div class="form-group">
-                <label for="location">Location:</label>
-                <input
-                  type="text"
-                  id="location"
-                  pattern="[A-Za-z]+"
-                  title="Only alphabets allowed (no spaces or numbers)"
-                  required
-                />
-                <span class="validation-error" id="location-error"></span>
-              </div>
-              <div class="form-group">
-                <label for="contact">Contact Number:</label>
-                <input
-                  type="tel"
-                  id="contact"
-                  pattern="\+91[0-9]{10}"
-                  title="+91 followed by 10 digits"
-                  value="+91"
-                  required
-                />
-                <span class="validation-error" id="contact-error"></span>
-              </div>
-              <div class="form-group">
-                <label for="cattleCount">Cattle Count:</label>
-                <input type="number" id="cattleCount" min="1" required />
-              </div>
-              <div class="form-group">
-                <label for="dailySupply">Avg. Daily Supply (L/day):</label>
-                <input
-                  type="number"
-                  id="dailySupply"
-                  min="0"
-                  step="0.1"
-                  required
-                />
-              </div>
-              <div class="form-group">
-                <label for="qualityRating">Quality Rating (0-5):</label>
-                <input
-                  type="number"
-                  id="qualityRating"
-                  min="0"
-                  max="5"
-                  step="0.1"
-                  required
-                />
-              </div>
-              <button type="submit" class="btn btn-primary">
-                Add Customer
+            <div class="crm-pagination">
+              <button
+                id="prevPageBtn"
+                class="crm-btn crm-btn-secondary"
+                disabled
+              >
+                <i class="fas fa-chevron-left"></i> Previous
               </button>
-            </form>
+              <span id="paginationInfo">Page 1 of 1</span>
+              <button
+                id="nextPageBtn"
+                class="crm-btn crm-btn-secondary"
+                disabled
+              >
+                Next <i class="fas fa-chevron-right"></i>
+              </button>
+            </div>
           </div>
         </div>
 
-        <!-- Milk Collection Dashboard -->
-        <section class="crm-section">
-          <h3>Milk Collection Dashboard</h3>
-          <div class="card-grid">
-            <div class="dashboard-card">
-              <div class="card-icon"><i class="fas fa-weight-hanging"></i></div>
-              <h4>Today's Collection</h4>
-              <h2>1,842 L</h2>
-              <p class="green-text">
-                <i class="fas fa-arrow-up"></i> 8% from yesterday
-              </p>
+        <!-- Purchase History Modal -->
+        <div id="purchaseHistoryModal" class="crm-modal">
+          <div class="crm-modal-content crm-modal-lg">
+            <div class="crm-modal-header">
+              <h2>Purchase History - <span id="customerNameHeader"></span></h2>
+              <span class="crm-modal-close" id="closePurchaseHistoryBtn"
+                >&times;</span
+              >
             </div>
-            <div class="dashboard-card">
-              <div class="card-icon"><i class="fas fa-calendar-week"></i></div>
-              <h4>This Week's Avg.</h4>
-              <h2>1,765 L/day</h2>
-              <p class="green-text">
-                <i class="fas fa-arrow-up"></i> 5% from last week
-              </p>
-            </div>
-            <div class="dashboard-card">
-              <div class="card-icon"><i class="fas fa-trophy"></i></div>
-              <h4>Top Farmer Today</h4>
-              <h2>Mohammed Arif</h2>
-              <p>142 L supplied</p>
-            </div>
-            <div class="dashboard-card">
-              <div class="card-icon"><i class="fas fa-flask"></i></div>
-              <h4>Avg. Fat Content</h4>
-              <h2>4.2%</h2>
-              <p class="green-text">Within ideal range</p>
-            </div>
-          </div>
-        </section>
-
-        <!-- Customer Support-->
-        <section class="crm-section">
-          <div class="section-header">
-            <h3>Customer Support</h3>
-            <div class="filter-options">
-              <div class="filter-group">
-                <select class="filter-select" id="statusFilter">
-                  <option value="all">All Status</option>
-                  <option value="open">Open</option>
-                  <option value="in-progress">In Progress</option>
-                  <option value="resolved">Resolved</option>
-                </select>
-                <i class="fas fa-chevron-down filter-icon"></i>
+            <div class="crm-modal-body">
+              <!-- Purchase History Stats -->
+              <div class="crm-purchase-stats">
+                <div class="crm-purchase-stat">
+                  <h4>Total Orders</h4>
+                  <p id="totalOrdersValue">0</p>
+                </div>
+                <div class="crm-purchase-stat">
+                  <h4>Total Spent</h4>
+                  <p id="totalSpentValue">₹0</p>
+                </div>
+                <div class="crm-purchase-stat">
+                  <h4>Avg. Order Value</h4>
+                  <p id="avgOrderValue">₹0</p>
+                </div>
+                <div class="crm-purchase-stat">
+                  <h4>First Purchase</h4>
+                  <p id="firstPurchaseDate">-</p>
+                </div>
               </div>
-              <button class="btn btn-primary" id="newTicketBtn">
-                <i class="fas fa-plus"></i> New Ticket
-              </button>
+
+              <!-- Purchase History Table -->
+              <div class="crm-table-container">
+                <table class="crm-purchase-table" id="purchaseHistoryTable">
+                  <thead>
+                    <tr>
+                      <th>Order ID</th>
+                      <th>Date</th>
+                      <th>Products</th>
+                      <th>Quantity</th>
+                      <th>Amount</th>
+                      <th>Status</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="purchaseHistoryTableBody">
+                    <!-- Purchase history rows will be populated by JavaScript -->
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
+        </div>
 
-          <table class="crm-table" id="ticketsTable">
-            <thead>
-              <tr>
-                <th>Ticket ID</th>
-                <th>Farmer</th>
-                <th>Issue Type</th>
-                <th>Priority</th>
-                <th>Date Opened</th>
-                <th>Status</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr data-status="open">
-                <td>#DFT1001</td>
-                <td>Anita Devi</td>
-                <td>Milk Testing</td>
-                <td><span class="priority medium">Medium</span></td>
-                <td>2025-04-10</td>
-                <td><span class="status open">Open</span></td>
-                <td>
-                  <button class="btn-icon delete-btn">
-                    <i class="fas fa-trash"></i>
-                  </button>
-                </td>
-              </tr>
-              <tr data-status="in-progress">
-                <td>#DFT1002</td>
-                <td>Rajesh Kumar</td>
-                <td>Equipment Repair</td>
-                <td><span class="priority high">High</span></td>
-                <td>2025-04-12</td>
-                <td><span class="status in-progress">In Progress</span></td>
-                <td>
-                  <button class="btn-icon delete-btn">
-                    <i class="fas fa-trash"></i>
-                  </button>
-                </td>
-              </tr>
-              <tr data-status="resolved">
-                <td>#DFT1003</td>
-                <td>Mohammed Arif</td>
-                <td>Feed Supply</td>
-                <td><span class="priority low">Low</span></td>
-                <td>2025-04-15</td>
-                <td><span class="status resolved">Resolved</span></td>
-                <td>
-                  <button class="btn-icon delete-btn">
-                    <i class="fas fa-trash"></i>
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </section>
-
-        <!-- Customer Support New Ticket Form -->
-        <div class="modal-overlay" id="ticketModal">
-          <div class="modal-container">
-            <div class="modal-header">
-              <h3>Create New Support Ticket</h3>
-              <button class="close-modal">&times;</button>
+        <!-- Order Details Modal -->
+        <div id="orderDetailsModal" class="crm-modal">
+          <div class="crm-modal-content">
+            <div class="crm-modal-header">
+              <h2>Order Details: <span id="orderIdHeader"></span></h2>
+              <span class="crm-modal-close" id="closeOrderDetailsBtn"
+                >&times;</span
+              >
             </div>
-            <div class="modal-body">
-              <form id="ticketForm">
-                <div class="form-group">
-                  <label for="farmerName">Farmer Name</label>
-                  <input
-                    type="text"
-                    id="farmerName"
-                    pattern="[A-Za-z]+"
-                    title="Only alphabetic characters allowed (no numbers, spaces, or symbols)"
-                    required
-                  />
-                  <span class="validation-error" id="farmerName-error"></span>
+            <div class="crm-modal-body">
+              <div class="crm-form-row">
+                <div class="crm-form-group">
+                  <label>Order Date</label>
+                  <p id="orderDateValue" class="crm-detail-value"></p>
                 </div>
-                <div class="form-group">
-                  <label for="issueType">Issue Type</label>
-                  <select id="issueType" required>
-                    <option value="">Select Issue Type</option>
-                    <option value="Milk Testing">Milk Testing</option>
-                    <option value="Equipment Repair">Equipment Repair</option>
-                    <option value="Feed Supply">Feed Supply</option>
-                    <option value="Animal Health">Animal Health</option>
-                    <option value="Other">Other</option>
-                  </select>
+
+                <div class="crm-form-group">
+                  <label>Status</label>
+                  <p id="orderStatusValue" class="crm-detail-value"></p>
                 </div>
-                <div class="form-group">
-                  <label for="priority">Priority</label>
-                  <select id="priority" required>
-                    <option value="">Select Priority</option>
-                    <option value="low">Low</option>
-                    <option value="medium">Medium</option>
-                    <option value="high">High</option>
-                  </select>
+
+                <div class="crm-form-group">
+                  <label>Payment Method</label>
+                  <p id="paymentMethodValue" class="crm-detail-value"></p>
                 </div>
-                <div class="form-group">
-                  <label for="date">Date</label>
-                  <input type="date" id="date" required class="date-input" />
+              </div>
+
+              <div class="crm-form-row">
+                <div class="crm-form-group">
+                  <label>Delivery Address</label>
+                  <p id="deliveryAddressValue" class="crm-detail-value"></p>
                 </div>
-                <div class="form-actions">
-                  <button type="button" class="btn btn-secondary close-modal">
+              </div>
+
+              <h3>Order Items</h3>
+              <div class="crm-table-container">
+                <table class="crm-purchase-table">
+                  <thead>
+                    <tr>
+                      <th>Product</th>
+                      <th>Unit Price</th>
+                      <th>Quantity</th>
+                      <th>Total</th>
+                    </tr>
+                  </thead>
+                  <tbody id="orderItemsTableBody">
+                    <!-- Order items will be added here dynamically -->
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="crm-order-summary">
+                <div class="crm-order-total">
+                  <div class="crm-total-row">
+                    <span>Subtotal:</span>
+                    <span id="orderSubtotalValue"></span>
+                  </div>
+                  <div class="crm-total-row">
+                    <span>Tax:</span>
+                    <span id="orderTaxValue"></span>
+                  </div>
+                  <div class="crm-total-row crm-grand-total">
+                    <span>Total:</span>
+                    <span id="orderTotalValue"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Customer Form Modal -->
+        <div id="customerFormModal" class="crm-modal">
+          <div class="crm-modal-content">
+            <div class="crm-modal-header">
+              <h2 id="customerFormTitle">Add New Customer</h2>
+              <span class="crm-modal-close" id="closeCustomerFormBtn"
+                >&times;</span
+              >
+            </div>
+            <div class="crm-modal-body">
+              <form id="customerForm">
+                <input type="hidden" id="customerId" />
+
+                <div class="crm-form-row">
+                  <div class="crm-form-group">
+                    <label for="customerName">Customer Name*</label>
+                    <input type="text" id="customerName" required />
+                  </div>
+
+                  <div class="crm-form-group">
+                    <label for="customerType">Customer Type*</label>
+                    <select id="customerType" required>
+                      <option value="">Select Type</option>
+                      <option value="retail">Retail</option>
+                      <option value="wholesale">Wholesale</option>
+                      <option value="distributor">Distributor</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="crm-form-row">
+                  <div class="crm-form-group">
+                    <label for="customerPhone">Phone Number*</label>
+                    <input type="tel" id="customerPhone" required />
+                  </div>
+
+                  <div class="crm-form-group">
+                    <label for="customerEmail">Email</label>
+                    <input type="email" id="customerEmail" />
+                  </div>
+                </div>
+
+                <div class="crm-form-group">
+                  <label for="customerAddress">Address*</label>
+                  <textarea id="customerAddress" rows="3" required></textarea>
+                </div>
+
+                <div class="crm-form-row">
+                  <div class="crm-form-group">
+                    <label for="customerCity">City*</label>
+                    <input type="text" id="customerCity" required />
+                  </div>
+
+                  <div class="crm-form-group">
+                    <label for="customerState">State*</label>
+                    <input type="text" id="customerState" required />
+                  </div>
+
+                  <div class="crm-form-group">
+                    <label for="customerPincode">Pincode*</label>
+                    <input type="text" id="customerPincode" required />
+                  </div>
+                </div>
+
+                <div class="crm-form-group">
+                  <label for="customerPreferences">Preferences/Notes</label>
+                  <textarea id="customerPreferences" rows="2"></textarea>
+                </div>
+
+                <div class="crm-form-actions">
+                  <button
+                    type="button"
+                    id="cancelCustomerFormBtn"
+                    class="crm-btn crm-btn-secondary"
+                  >
                     Cancel
                   </button>
-                  <button type="submit" class="btn btn-primary">
-                    Submit Ticket
+                  <button type="submit" class="crm-btn crm-btn-primary">
+                    Save Customer
                   </button>
                 </div>
               </form>
@@ -629,122 +643,1107 @@
           </div>
         </div>
 
-        <!-- Veterinary Services -->
-        <section class="crm-section">
-          <div class="section-header">
-            <h3>Veterinary Services</h3>
-            <button class="btn btn-primary" id="scheduleVetBtn">
-              <i class="fas fa-plus"></i> Schedule Visit
+        <!-- Order Details Modal -->
+        <div id="orderDetailsModal" class="crm-modal">
+          <div class="crm-modal-content">
+            <div class="crm-modal-header">
+              <h2>Order Details - <span id="orderIdHeader"></span></h2>
+              <span class="crm-modal-close" id="closeOrderDetailsBtn"
+                >&times;</span
+              >
+            </div>
+            <div class="crm-modal-body">
+              <div class="crm-order-details">
+                <div class="crm-order-info">
+                  <div class="crm-order-info-item">
+                    <strong>Order Date:</strong>
+                    <span id="orderDateValue"></span>
+                  </div>
+                  <div class="crm-order-info-item">
+                    <strong>Status:</strong>
+                    <span id="orderStatusValue"></span>
+                  </div>
+                  <div class="crm-order-info-item">
+                    <strong>Payment Method:</strong>
+                    <span id="paymentMethodValue"></span>
+                  </div>
+                  <div class="crm-order-info-item">
+                    <strong>Delivery Address:</strong>
+                    <span id="deliveryAddressValue"></span>
+                  </div>
+                </div>
+
+                <table class="crm-order-items-table">
+                  <thead>
+                    <tr>
+                      <th>Product</th>
+                      <th>Unit Price</th>
+                      <th>Quantity</th>
+                      <th>Total</th>
+                    </tr>
+                  </thead>
+                  <tbody id="orderItemsTableBody">
+                    <!-- Order items will be populated by JavaScript -->
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <td colspan="3" class="text-right">
+                        <strong>Subtotal:</strong>
+                      </td>
+                      <td id="orderSubtotalValue"></td>
+                    </tr>
+                    <tr>
+                      <td colspan="3" class="text-right">
+                        <strong>Tax (5%):</strong>
+                      </td>
+                      <td id="orderTaxValue"></td>
+                    </tr>
+                    <tr>
+                      <td colspan="3" class="text-right">
+                        <strong>Total:</strong>
+                      </td>
+                      <td id="orderTotalValue"></td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Delete Confirmation Modal -->
+        <div id="deleteConfirmModal" class="crm-modal">
+          <div class="crm-modal-content crm-modal-sm">
+            <div class="crm-modal-header">
+              <h2>Confirm Deletion</h2>
+              <span class="crm-modal-close" id="closeDeleteConfirmBtn"
+                >&times;</span
+              >
+            </div>
+            <div class="crm-modal-body">
+              <p>
+                Are you sure you want to delete this customer? This action
+                cannot be undone.
+              </p>
+              <input type="hidden" id="deleteCustomerId" />
+              <div class="crm-form-actions">
+                <button
+                  type="button"
+                  id="cancelDeleteBtn"
+                  class="crm-btn crm-btn-secondary"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  id="confirmDeleteBtn"
+                  class="crm-btn crm-btn-danger"
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Order Management Section -->
+        <div class="crm-section-container order-management-section">
+          <div class="crm-section-header">
+            <h2>Order Management</h2>
+            <button id="createOrderBtn" class="crm-btn crm-btn-primary">
+              <i class="fas fa-plus"></i> Create New Order
             </button>
           </div>
-          <div class="vet-grid">
-            <div class="vet-card">
-              <h4><i class="fas fa-syringe"></i> Upcoming Vaccinations</h4>
-              <ul class="vet-list">
-                <li>
-                  <span>Rajesh Kumar</span>
-                  <span>Foot & Mouth - Due Apr 25</span>
-                  <button class="btn-icon vet-action">
+
+          <!-- Order Management Tabs -->
+          <div class="order-tabs">
+            <button class="order-tab-btn active" data-tab="daily-orders">
+              <i class="fas fa-calendar-day"></i> Daily Orders
+            </button>
+            <button class="order-tab-btn" data-tab="weekly-orders">
+              <i class="fas fa-calendar-week"></i> Weekly Orders
+            </button>
+            <button class="order-tab-btn" data-tab="monthly-orders">
+              <i class="fas fa-calendar-alt"></i> Monthly Orders
+            </button>
+            <button class="order-tab-btn" data-tab="upcoming-deliveries">
+              <i class="fas fa-truck"></i> Upcoming Deliveries
+            </button>
+          </div>
+
+          <!-- Order Management Content -->
+          <div class="order-tab-content">
+            <!-- Daily Orders Tab -->
+            <div id="daily-orders" class="order-tab-pane active">
+              <div class="order-summary-cards">
+                <div class="order-summary-card">
+                  <div class="order-card-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                  </div>
+                  <div class="order-card-info">
+                    <h4>Today's Orders</h4>
+                    <p class="order-card-value">42</p>
+                  </div>
+                </div>
+                <div class="order-summary-card">
+                  <div class="order-card-icon">
                     <i class="fas fa-check-circle"></i>
-                  </button>
-                </li>
-                <li>
-                  <span>Anita Devi</span>
-                  <span>Brucellosis - Due May 2</span>
-                  <button class="btn-icon vet-action">
-                    <i class="fas fa-check-circle"></i>
-                  </button>
-                </li>
-                <li>
-                  <span>Suresh Patel</span>
-                  <span>Anthrax - Due May 5</span>
-                  <button class="btn-icon vet-action">
-                    <i class="fas fa-check-circle"></i>
-                  </button>
-                </li>
-              </ul>
-              <button class="btn btn-secondary">View All Vaccinations</button>
+                  </div>
+                  <div class="order-card-info">
+                    <h4>Completed</h4>
+                    <p class="order-card-value">28</p>
+                  </div>
+                </div>
+                <div class="order-summary-card">
+                  <div class="order-card-icon">
+                    <i class="fas fa-clock"></i>
+                  </div>
+                  <div class="order-card-info">
+                    <h4>Pending</h4>
+                    <p class="order-card-value">14</p>
+                  </div>
+                </div>
+                <div class="order-summary-card">
+                  <div class="order-card-icon">
+                    <i class="fas fa-rupee-sign"></i>
+                  </div>
+                  <div class="order-card-info">
+                    <h4>Revenue</h4>
+                    <p class="order-card-value">₹24,850</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="crm-table-container">
+                <table class="crm-purchase-table" id="dailyOrdersTable">
+                  <thead>
+                    <tr>
+                      <th>Order ID</th>
+                      <th>Customer</th>
+                      <th>Time</th>
+                      <th>Products</th>
+                      <th>Amount</th>
+                      <th>Status</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>#ORD-2023-06-15-001</td>
+                      <td>Rajesh Kumar</td>
+                      <td>09:15 AM</td>
+                      <td>Full Cream Milk (2), Butter (1)</td>
+                      <td>₹580</td>
+                      <td>
+                        <span class="status-badge completed">Delivered</span>
+                      </td>
+                      <td class="action-buttons">
+                        <button
+                          class="action-btn view-btn"
+                          title="View Details"
+                        >
+                          <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="action-btn reorder-btn" title="Reorder">
+                          <i class="fas fa-redo"></i>
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>#ORD-2023-06-15-002</td>
+                      <td>Priya Sharma</td>
+                      <td>10:30 AM</td>
+                      <td>Toned Milk (3), Yogurt (2)</td>
+                      <td>₹420</td>
+                      <td>
+                        <span class="status-badge completed">Delivered</span>
+                      </td>
+                      <td class="action-buttons">
+                        <button
+                          class="action-btn view-btn"
+                          title="View Details"
+                        >
+                          <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="action-btn reorder-btn" title="Reorder">
+                          <i class="fas fa-redo"></i>
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>#ORD-2023-06-15-003</td>
+                      <td>Amit Patel</td>
+                      <td>11:45 AM</td>
+                      <td>Double Toned Milk (5), Cheese (1)</td>
+                      <td>₹750</td>
+                      <td>
+                        <span class="status-badge pending">In Transit</span>
+                      </td>
+                      <td class="action-buttons">
+                        <button
+                          class="action-btn view-btn"
+                          title="View Details"
+                        >
+                          <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="action-btn modify-btn" title="Modify">
+                          <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="action-btn cancel-btn" title="Cancel">
+                          <i class="fas fa-times"></i>
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>#ORD-2023-06-15-004</td>
+                      <td>Sunita Reddy</td>
+                      <td>01:20 PM</td>
+                      <td>Full Cream Milk (4), Paneer (2)</td>
+                      <td>₹920</td>
+                      <td>
+                        <span class="status-badge pending">Processing</span>
+                      </td>
+                      <td class="action-buttons">
+                        <button
+                          class="action-btn view-btn"
+                          title="View Details"
+                        >
+                          <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="action-btn modify-btn" title="Modify">
+                          <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="action-btn cancel-btn" title="Cancel">
+                          <i class="fas fa-times"></i>
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>#ORD-2023-06-15-005</td>
+                      <td>Vikram Singh</td>
+                      <td>02:45 PM</td>
+                      <td>Toned Milk (2), Ghee (1)</td>
+                      <td>₹680</td>
+                      <td>
+                        <span class="status-badge pending">Scheduled</span>
+                      </td>
+                      <td class="action-buttons">
+                        <button
+                          class="action-btn view-btn"
+                          title="View Details"
+                        >
+                          <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="action-btn modify-btn" title="Modify">
+                          <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="action-btn cancel-btn" title="Cancel">
+                          <i class="fas fa-times"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
-            <div class="vet-card">
-              <h4><i class="fas fa-stethoscope"></i> Recent Health Checks</h4>
-              <ul class="vet-list">
-                <li>
-                  <span>Mohammed Arif</span>
-                  <span>32 cattle - All Healthy</span>
-                  <button class="btn-icon vet-action">
-                    <i class="fas fa-file-alt"></i>
+
+            <!-- Weekly Orders Tab -->
+            <div id="weekly-orders" class="order-tab-pane">
+              <div class="order-summary-cards">
+                <div class="order-summary-card">
+                  <div class="order-card-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                  </div>
+                  <div class="order-card-info">
+                    <h4>Weekly Orders</h4>
+                    <p class="order-card-value">285</p>
+                  </div>
+                </div>
+                <div class="order-summary-card">
+                  <div class="order-card-icon">
+                    <i class="fas fa-check-circle"></i>
+                  </div>
+                  <div class="order-card-info">
+                    <h4>Completed</h4>
+                    <p class="order-card-value">210</p>
+                  </div>
+                </div>
+                <div class="order-summary-card">
+                  <div class="order-card-icon">
+                    <i class="fas fa-clock"></i>
+                  </div>
+                  <div class="order-card-info">
+                    <h4>Pending</h4>
+                    <p class="order-card-value">75</p>
+                  </div>
+                </div>
+                <div class="order-summary-card">
+                  <div class="order-card-icon">
+                    <i class="fas fa-rupee-sign"></i>
+                  </div>
+                  <div class="order-card-info">
+                    <h4>Revenue</h4>
+                    <p class="order-card-value">₹1,68,450</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="order-chart-container">
+                <canvas id="weeklyOrdersChart"></canvas>
+              </div>
+
+              <div class="crm-table-container">
+                <table class="crm-purchase-table" id="weeklyOrdersTable">
+                  <thead>
+                    <tr>
+                      <th>Day</th>
+                      <th>Orders</th>
+                      <th>Completed</th>
+                      <th>Pending</th>
+                      <th>Revenue</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Monday</td>
+                      <td>42</td>
+                      <td>38</td>
+                      <td>4</td>
+                      <td>₹24,850</td>
+                      <td>
+                        <button class="crm-btn crm-btn-sm">View Details</button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Tuesday</td>
+                      <td>38</td>
+                      <td>35</td>
+                      <td>3</td>
+                      <td>₹22,680</td>
+                      <td>
+                        <button class="crm-btn crm-btn-sm">View Details</button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Wednesday</td>
+                      <td>45</td>
+                      <td>40</td>
+                      <td>5</td>
+                      <td>₹26,750</td>
+                      <td>
+                        <button class="crm-btn crm-btn-sm">View Details</button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Thursday</td>
+                      <td>40</td>
+                      <td>32</td>
+                      <td>8</td>
+                      <td>₹23,920</td>
+                      <td>
+                        <button class="crm-btn crm-btn-sm">View Details</button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Friday</td>
+                      <td>48</td>
+                      <td>35</td>
+                      <td>13</td>
+                      <td>₹28,450</td>
+                      <td>
+                        <button class="crm-btn crm-btn-sm">View Details</button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Saturday</td>
+                      <td>52</td>
+                      <td>30</td>
+                      <td>22</td>
+                      <td>₹30,800</td>
+                      <td>
+                        <button class="crm-btn crm-btn-sm">View Details</button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Sunday</td>
+                      <td>20</td>
+                      <td>0</td>
+                      <td>20</td>
+                      <td>₹11,000</td>
+                      <td>
+                        <button class="crm-btn crm-btn-sm">View Details</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Monthly Orders Tab -->
+            <div id="monthly-orders" class="order-tab-pane">
+              <div class="order-summary-cards">
+                <div class="order-summary-card">
+                  <div class="order-card-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                  </div>
+                  <div class="order-card-info">
+                    <h4>Monthly Orders</h4>
+                    <p class="order-card-value">1,245</p>
+                  </div>
+                </div>
+                <div class="order-summary-card">
+                  <div class="order-card-icon">
+                    <i class="fas fa-check-circle"></i>
+                  </div>
+                  <div class="order-card-info">
+                    <h4>Completed</h4>
+                    <p class="order-card-value">1,180</p>
+                  </div>
+                </div>
+                <div class="order-summary-card">
+                  <div class="order-card-icon">
+                    <i class="fas fa-clock"></i>
+                  </div>
+                  <div class="order-card-info">
+                    <h4>Pending</h4>
+                    <p class="order-card-value">65</p>
+                  </div>
+                </div>
+                <div class="order-summary-card">
+                  <div class="order-card-icon">
+                    <i class="fas fa-rupee-sign"></i>
+                  </div>
+                  <div class="order-card-info">
+                    <h4>Revenue</h4>
+                    <p class="order-card-value">₹7,35,250</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="order-chart-container">
+                <canvas id="monthlyOrdersChart"></canvas>
+              </div>
+
+              <div class="order-analytics-grid">
+                <div class="order-analytics-card">
+                  <h4>Top Products</h4>
+                  <ul class="order-analytics-list">
+                    <li>
+                      <span>Full Cream Milk</span>
+                      <span>32%</span>
+                    </li>
+                    <li>
+                      <span>Toned Milk</span>
+                      <span>28%</span>
+                    </li>
+                    <li>
+                      <span>Yogurt</span>
+                      <span>15%</span>
+                    </li>
+                    <li>
+                      <span>Paneer</span>
+                      <span>12%</span>
+                    </li>
+                    <li>
+                      <span>Ghee</span>
+                      <span>8%</span>
+                    </li>
+                  </ul>
+                </div>
+                <div class="order-analytics-card">
+                  <h4>Top Customers</h4>
+                  <ul class="order-analytics-list">
+                    <li>
+                      <span>Rajesh Kumar</span>
+                      <span>₹42,500</span>
+                    </li>
+                    <li>
+                      <span>Priya Sharma</span>
+                      <span>₹38,750</span>
+                    </li>
+                    <li>
+                      <span>Amit Patel</span>
+                      <span>₹35,200</span>
+                    </li>
+                    <li>
+                      <span>Sunita Reddy</span>
+                      <span>₹32,800</span>
+                    </li>
+                    <li>
+                      <span>Vikram Singh</span>
+                      <span>₹30,150</span>
+                    </li>
+                  </ul>
+                </div>
+                <div class="order-analytics-card">
+                  <h4>Payment Methods</h4>
+                  <ul class="order-analytics-list">
+                    <li>
+                      <span>UPI</span>
+                      <span>45%</span>
+                    </li>
+                    <li>
+                      <span>Credit Card</span>
+                      <span>25%</span>
+                    </li>
+                    <li>
+                      <span>Debit Card</span>
+                      <span>15%</span>
+                    </li>
+                    <li>
+                      <span>Cash</span>
+                      <span>10%</span>
+                    </li>
+                    <li>
+                      <span>Net Banking</span>
+                      <span>5%</span>
+                    </li>
+                  </ul>
+                </div>
+                <div class="order-analytics-card">
+                  <h4>Delivery Areas</h4>
+                  <ul class="order-analytics-list">
+                    <li>
+                      <span>Koramangala</span>
+                      <span>22%</span>
+                    </li>
+                    <li>
+                      <span>Indiranagar</span>
+                      <span>18%</span>
+                    </li>
+                    <li>
+                      <span>HSR Layout</span>
+                      <span>15%</span>
+                    </li>
+                    <li>
+                      <span>Whitefield</span>
+                      <span>12%</span>
+                    </li>
+                    <li>
+                      <span>Electronic City</span>
+                      <span>10%</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- Upcoming Deliveries Tab -->
+            <div id="upcoming-deliveries" class="order-tab-pane">
+              <div class="order-delivery-header">
+                <h3>Upcoming Delivery Schedule</h3>
+                <div class="order-delivery-actions">
+                  <button class="crm-btn crm-btn-secondary">
+                    <i class="fas fa-print"></i> Print Schedule
                   </button>
-                </li>
-                <li>
-                  <span>Anita Devi</span>
-                  <span>2 cases of Mastitis</span>
-                  <button class="btn-icon vet-action">
-                    <i class="fas fa-file-alt"></i>
+                  <button class="crm-btn crm-btn-primary">
+                    <i class="fas fa-download"></i> Export
                   </button>
-                </li>
-                <li>
-                  <span>Rajesh Kumar</span>
-                  <span>1 case of Lameness</span>
-                  <button class="btn-icon vet-action">
-                    <i class="fas fa-file-alt"></i>
-                  </button>
-                </li>
-              </ul>
-              <button class="btn btn-secondary">View All Health Reports</button>
+                </div>
+              </div>
+
+              <div class="order-delivery-filters">
+                <div class="order-filter-group">
+                  <label>Date Range:</label>
+                  <select class="order-filter-select">
+                    <option>Today</option>
+                    <option>Tomorrow</option>
+                    <option>Next 3 Days</option>
+                    <option>Next Week</option>
+                    <option>Custom Range</option>
+                  </select>
+                </div>
+                <div class="order-filter-group">
+                  <label>Route:</label>
+                  <select class="order-filter-select">
+                    <option>All Routes</option>
+                    <option>North Route</option>
+                    <option>South Route</option>
+                    <option>East Route</option>
+                    <option>West Route</option>
+                  </select>
+                </div>
+                <div class="order-filter-group">
+                  <label>Status:</label>
+                  <select class="order-filter-select">
+                    <option>All Statuses</option>
+                    <option>Scheduled</option>
+                    <option>In Transit</option>
+                    <option>Delivered</option>
+                    <option>Delayed</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="crm-table-container">
+                <table class="crm-purchase-table" id="upcomingDeliveriesTable">
+                  <thead>
+                    <tr>
+                      <th>Delivery ID</th>
+                      <th>Customer</th>
+                      <th>Address</th>
+                      <th>Date</th>
+                      <th>Time Slot</th>
+                      <th>Items</th>
+                      <th>Status</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>#DEL-2023-06-15-001</td>
+                      <td>Rajesh Kumar</td>
+                      <td>123, Koramangala, Bangalore</td>
+                      <td>15 Jun 2023</td>
+                      <td>6:00 AM - 8:00 AM</td>
+                      <td>3 items</td>
+                      <td>
+                        <span class="status-badge scheduled">Scheduled</span>
+                      </td>
+                      <td class="action-buttons">
+                        <button
+                          class="action-btn view-btn"
+                          title="View Details"
+                        >
+                          <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="action-btn modify-btn" title="Modify">
+                          <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="action-btn cancel-btn" title="Cancel">
+                          <i class="fas fa-times"></i>
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>#DEL-2023-06-15-002</td>
+                      <td>Priya Sharma</td>
+                      <td>456, Indiranagar, Bangalore</td>
+                      <td>15 Jun 2023</td>
+                      <td>6:00 AM - 8:00 AM</td>
+                      <td>2 items</td>
+                      <td>
+                        <span class="status-badge scheduled">Scheduled</span>
+                      </td>
+                      <td class="action-buttons">
+                        <button
+                          class="action-btn view-btn"
+                          title="View Details"
+                        >
+                          <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="action-btn modify-btn" title="Modify">
+                          <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="action-btn cancel-btn" title="Cancel">
+                          <i class="fas fa-times"></i>
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>#DEL-2023-06-15-003</td>
+                      <td>Amit Patel</td>
+                      <td>789, HSR Layout, Bangalore</td>
+                      <td>15 Jun 2023</td>
+                      <td>8:00 AM - 10:00 AM</td>
+                      <td>4 items</td>
+                      <td>
+                        <span class="status-badge in-transit">In Transit</span>
+                      </td>
+                      <td class="action-buttons">
+                        <button
+                          class="action-btn view-btn"
+                          title="View Details"
+                        >
+                          <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="action-btn track-btn" title="Track">
+                          <i class="fas fa-map-marker-alt"></i>
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>#DEL-2023-06-15-004</td>
+                      <td>Sunita Reddy</td>
+                      <td>101, Whitefield, Bangalore</td>
+                      <td>15 Jun 2023</td>
+                      <td>8:00 AM - 10:00 AM</td>
+                      <td>3 items</td>
+                      <td>
+                        <span class="status-badge scheduled">Scheduled</span>
+                      </td>
+                      <td class="action-buttons">
+                        <button
+                          class="action-btn view-btn"
+                          title="View Details"
+                        >
+                          <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="action-btn modify-btn" title="Modify">
+                          <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="action-btn cancel-btn" title="Cancel">
+                          <i class="fas fa-times"></i>
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>#DEL-2023-06-15-005</td>
+                      <td>Vikram Singh</td>
+                      <td>202, Electronic City, Bangalore</td>
+                      <td>15 Jun 2023</td>
+                      <td>10:00 AM - 12:00 PM</td>
+                      <td>2 items</td>
+                      <td>
+                        <span class="status-badge delayed">Delayed</span>
+                      </td>
+                      <td class="action-buttons">
+                        <button
+                          class="action-btn view-btn"
+                          title="View Details"
+                        >
+                          <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="action-btn track-btn" title="Track">
+                          <i class="fas fa-map-marker-alt"></i>
+                        </button>
+                        <button
+                          class="action-btn notify-btn"
+                          title="Notify Customer"
+                        >
+                          <i class="fas fa-bell"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
-        </section>
+        </div>
 
-        <!-- Veterinary Visit Scheduling Modal -->
-        <div id="vetModal" class="modal">
-          <div class="modal-content">
-            <span class="close">&times;</span>
-            <h3>Schedule Veterinary Visit</h3>
-            <form id="vetForm">
-              <div class="form-group">
-                <label for="farmerSelect">Select Farmer:</label>
-                <select id="farmerSelect" required>
-                  <option value="">Choose a farmer</option>
-                  <option value="Rajesh Kumar">Rajesh Kumar</option>
-                  <option value="Anita Devi">Anita Devi</option>
-                  <option value="Mohammed Arif">Mohammed Arif</option>
-                  <option value="Suresh Patel">Suresh Patel</option>
-                  <option value="Lakshmi Narayanan">Lakshmi Narayanan</option>
-                </select>
+        <!-- Create Order Modal -->
+        <div id="createOrderModal" class="crm-modal">
+          <div class="crm-modal-content crm-modal-lg">
+            <div class="crm-modal-header">
+              <h2>Create New Order</h2>
+              <span class="crm-modal-close" id="closeCreateOrderBtn"
+                >&times;</span
+              >
+            </div>
+            <div class="crm-modal-body">
+              <form id="createOrderForm">
+                <div class="crm-form-row">
+                  <div class="crm-form-group">
+                    <label for="orderCustomer">Customer Name*</label>
+                    <input
+                      type="text"
+                      id="orderCustomer"
+                      placeholder="Enter customer name"
+                      required
+                    />
+                  </div>
+                  <div class="crm-form-group">
+                    <label for="orderDate">Order Date*</label>
+                    <input type="date" id="orderDate" required />
+                  </div>
+                </div>
+
+                <div class="crm-form-row">
+                  <div class="crm-form-group">
+                    <label for="deliveryDate">Delivery Date*</label>
+                    <input type="date" id="deliveryDate" required />
+                  </div>
+                  <div class="crm-form-group">
+                    <label for="deliveryTimeSlot">Time Slot*</label>
+                    <select id="deliveryTimeSlot" required>
+                      <option value="">Select Time Slot</option>
+                      <option value="6-8">6:00 AM - 8:00 AM</option>
+                      <option value="8-10">8:00 AM - 10:00 AM</option>
+                      <option value="10-12">10:00 AM - 12:00 PM</option>
+                      <option value="12-2">12:00 PM - 2:00 PM</option>
+                      <option value="2-4">2:00 PM - 4:00 PM</option>
+                      <option value="4-6">4:00 PM - 6:00 PM</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="crm-form-row">
+                  <div class="crm-form-group full-width">
+                    <label for="deliveryAddress">Delivery Address*</label>
+                    <textarea id="deliveryAddress" rows="2" required></textarea>
+                  </div>
+                </div>
+
+                <h3>Order Items</h3>
+                <div class="order-items-container">
+                  <div class="order-item-header">
+                    <div class="order-item-product">Product</div>
+                    <div class="order-item-price">Price</div>
+                    <div class="order-item-quantity">Quantity</div>
+                    <div class="order-item-total">Total</div>
+                    <div class="order-item-actions">Action</div>
+                  </div>
+                  <div class="order-item-row">
+                    <div class="order-item-product">
+                      <input
+                        type="text"
+                        class="order-product-input"
+                        placeholder="Enter product name"
+                      />
+                    </div>
+                    <div class="order-item-price">
+                      <input
+                        type="number"
+                        class="order-price-input"
+                        placeholder="Price"
+                        value="60"
+                      />
+                    </div>
+                    <div class="order-item-quantity">
+                      <input
+                        type="number"
+                        class="order-quantity-input"
+                        placeholder="Qty"
+                        min="1"
+                        value="1"
+                      />
+                    </div>
+                    <div class="order-item-total">
+                      <input
+                        type="text"
+                        class="order-total-input"
+                        placeholder="Total"
+                        value="₹60"
+                        readonly
+                      />
+                    </div>
+                    <div class="order-item-actions">
+                      <button type="button" class="order-item-remove">
+                        <i class="fas fa-trash"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  id="addOrderItemBtn"
+                  class="crm-btn crm-btn-secondary"
+                >
+                  <i class="fas fa-plus"></i> Add Item
+                </button>
+
+                <div class="order-summary">
+                  <div class="order-summary-row">
+                    <span>Subtotal:</span>
+                    <span id="orderSubtotal">₹60</span>
+                  </div>
+                  <div class="order-summary-row">
+                    <span>Tax (5%):</span>
+                    <span id="orderTax">₹3</span>
+                  </div>
+                  <div class="order-summary-row">
+                    <span>Delivery Fee:</span>
+                    <span id="deliveryFee">₹20</span>
+                  </div>
+                  <div class="order-summary-row order-total">
+                    <span>Total:</span>
+                    <span id="orderTotal">₹83</span>
+                  </div>
+                </div>
+
+                <div class="crm-form-row">
+                  <div class="crm-form-group">
+                    <label for="paymentMethod">Payment Method*</label>
+                    <select id="paymentMethod" required>
+                      <option value="">Select Payment Method</option>
+                      <option value="upi">UPI</option>
+                      <option value="credit">Credit Card</option>
+                      <option value="debit">Debit Card</option>
+                      <option value="cash">Cash on Delivery</option>
+                      <option value="netbanking">Net Banking</option>
+                    </select>
+                  </div>
+                  <div class="crm-form-group">
+                    <label for="orderStatus">Status*</label>
+                    <select id="orderStatus" required>
+                      <option value="pending">Pending</option>
+                      <option value="confirmed">Confirmed</option>
+                      <option value="processing">Processing</option>
+                      <option value="scheduled">Scheduled for Delivery</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="crm-form-row">
+                  <div class="crm-form-group full-width">
+                    <label for="orderNotes">Notes</label>
+                    <textarea id="orderNotes" rows="2"></textarea>
+                  </div>
+                </div>
+
+                <div class="crm-form-actions">
+                  <button
+                    type="button"
+                    id="cancelCreateOrderBtn"
+                    class="crm-btn crm-btn-secondary"
+                  >
+                    Cancel
+                  </button>
+                  <button type="submit" class="crm-btn crm-btn-primary">
+                    Create Order
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modify Order Modal -->
+        <div id="modifyOrderModal" class="crm-modal">
+          <div class="crm-modal-content">
+            <div class="crm-modal-header">
+              <h2>Modify Order: <span id="modifyOrderId"></span></h2>
+              <span class="crm-modal-close" id="closeModifyOrderBtn"
+                >&times;</span
+              >
+            </div>
+            <div class="crm-modal-body">
+              <form id="modifyOrderForm">
+                <div class="crm-form-row">
+                  <div class="crm-form-group">
+                    <label for="modifyDeliveryDate">Delivery Date</label>
+                    <input type="date" id="modifyDeliveryDate" />
+                  </div>
+                  <div class="crm-form-group">
+                    <label for="modifyTimeSlot">Time Slot</label>
+                    <select id="modifyTimeSlot">
+                      <option value="6-8">6:00 AM - 8:00 AM</option>
+                      <option value="8-10">8:00 AM - 10:00 AM</option>
+                      <option value="10-12">10:00 AM - 12:00 PM</option>
+                      <option value="12-2">12:00 PM - 2:00 PM</option>
+                      <option value="2-4">2:00 PM - 4:00 PM</option>
+                      <option value="4-6">4:00 PM - 6:00 PM</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="crm-form-row">
+                  <div class="crm-form-group full-width">
+                    <label for="modifyAddress">Delivery Address</label>
+                    <textarea id="modifyAddress" rows="2"></textarea>
+                  </div>
+                </div>
+
+                <div class="crm-form-row">
+                  <div class="crm-form-group">
+                    <label for="modifyStatus">Status</label>
+                    <select id="modifyStatus">
+                      <option value="pending">Pending</option>
+                      <option value="confirmed">Confirmed</option>
+                      <option value="processing">Processing</option>
+                      <option value="scheduled">Scheduled for Delivery</option>
+                      <option value="in-transit">In Transit</option>
+                      <option value="delivered">Delivered</option>
+                      <option value="cancelled">Cancelled</option>
+                    </select>
+                  </div>
+                  <div class="crm-form-group">
+                    <label for="modifyPayment">Payment Method</label>
+                    <select id="modifyPayment">
+                      <option value="upi">UPI</option>
+                      <option value="credit">Credit Card</option>
+                      <option value="debit">Debit Card</option>
+                      <option value="cash">Cash on Delivery</option>
+                      <option value="netbanking">Net Banking</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="crm-form-row">
+                  <div class="crm-form-group full-width">
+                    <label for="modifyNotes">Notes</label>
+                    <textarea id="modifyNotes" rows="2"></textarea>
+                  </div>
+                </div>
+
+                <div class="crm-form-actions">
+                  <button
+                    type="button"
+                    id="cancelModifyOrderBtn"
+                    class="crm-btn crm-btn-secondary"
+                  >
+                    Cancel
+                  </button>
+                  <button type="submit" class="crm-btn crm-btn-primary">
+                    Save Changes
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cancel Order Modal -->
+        <div id="cancelOrderModal" class="crm-modal">
+          <div class="crm-modal-content crm-modal-sm">
+            <div class="crm-modal-header">
+              <h2>Cancel Order</h2>
+              <span class="crm-modal-close" id="closeCancelOrderBtn"
+                >&times;</span
+              >
+            </div>
+            <div class="crm-modal-body">
+              <p>
+                Are you sure you want to cancel this order? This action cannot
+                be undone.
+              </p>
+              <input type="hidden" id="cancelOrderId" />
+
+              <div class="crm-form-row">
+                <div class="crm-form-group full-width">
+                  <label for="cancelReason">Reason for Cancellation</label>
+                  <select id="cancelReason">
+                    <option value="">Select a reason</option>
+                    <option value="customer-request">Customer Request</option>
+                    <option value="out-of-stock">Items Out of Stock</option>
+                    <option value="delivery-issue">Delivery Issues</option>
+                    <option value="payment-issue">Payment Issues</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
               </div>
-              <div class="form-group">
-                <label for="visitType">Visit Type:</label>
-                <select id="visitType" required>
-                  <option value="">Select visit type</option>
-                  <option value="Vaccination">Vaccination</option>
-                  <option value="Regular Health Check">
-                    Regular Health Check
-                  </option>
-                  <option value="Emergency">Emergency</option>
-                  <option value="Pregnancy Check">Pregnancy Check</option>
-                  <option value="Deworming">Deworming</option>
-                </select>
+
+              <div
+                class="crm-form-row"
+                id="otherReasonContainer"
+                style="display: none"
+              >
+                <div class="crm-form-group full-width">
+                  <label for="otherCancelReason">Specify Reason</label>
+                  <textarea id="otherCancelReason" rows="2"></textarea>
+                </div>
               </div>
-              <div class="form-group">
-                <label for="visitDate">Scheduled Date:</label>
-                <input type="date" id="visitDate" required />
+
+              <div class="crm-form-actions">
+                <button
+                  type="button"
+                  id="backToCancelOrderBtn"
+                  class="crm-btn crm-btn-secondary"
+                >
+                  Go Back
+                </button>
+                <button
+                  type="button"
+                  id="confirmCancelOrderBtn"
+                  class="crm-btn crm-btn-danger"
+                >
+                  Cancel Order
+                </button>
               </div>
-              <div class="form-group">
-                <label for="visitTime">Scheduled Time:</label>
-                <input type="time" id="visitTime" required />
-              </div>
-              <div class="form-group">
-                <label for="vetNotes">Notes:</label>
-                <textarea
-                  id="vetNotes"
-                  rows="3"
-                  placeholder="Enter any specific details or requirements"
-                ></textarea>
-              </div>
-              <button type="submit" class="btn btn-primary">
-                Schedule Visit
-              </button>
-            </form>
+            </div>
           </div>
         </div>
       </div>
