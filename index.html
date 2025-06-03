@@ -12,6 +12,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="Js/Script.js" defer></script>
     <script src="Js/crm.js" defer></script>
+    <script src="Js/sales.js" defer></script>
   </head>
 
   <body>
@@ -1748,252 +1749,6 @@
         </div>
       </div>
 
-      <!--PRODUCTION SECTION-->
-      <div
-        id="productionSection"
-        class="content-section main-content"
-        style="display: none"
-      >
-        <div class="dairy-banner">
-          <h1>Production Management</h1>
-        </div>
-
-        <!-- Production Overview -->
-        <section class="production-section">
-          <h3>Production Overview</h3>
-          <div class="card-grid">
-            <div class="dashboard-card">
-              <div class="card-icon"><i class="fas fa-flask"></i></div>
-              <h4>Today's Production</h4>
-              <h2>1,850 L</h2>
-              <p class="green-text"><i class="fas fa-arrow-up"></i> 5.2%</p>
-            </div>
-            <div class="dashboard-card">
-              <div class="card-icon"><i class="fas fa-industry"></i></div>
-              <h4>Processing Capacity</h4>
-              <h2>2,500 L/day</h2>
-              <p>74% utilized</p>
-            </div>
-            <div class="dashboard-card">
-              <div class="card-icon"><i class="fas fa-box"></i></div>
-              <h4>Packaged Units</h4>
-              <h2>3,700</h2>
-              <p class="green-text"><i class="fas fa-arrow-up"></i> 8.3%</p>
-            </div>
-            <div class="dashboard-card">
-              <div class="card-icon">
-                <i class="fas fa-exclamation-triangle"></i>
-              </div>
-              <h4>Quality Issues</h4>
-              <h2>0.5%</h2>
-              <p class="green-text"><i class="fas fa-arrow-down"></i> 0.2%</p>
-            </div>
-          </div>
-        </section>
-
-        <!-- Production Batches -->
-        <section class="production-section">
-          <div class="section-header">
-            <h3>Production Batches</h3>
-            <button class="btn btn-primary" id="addBatchBtn">
-              <i class="fas fa-plus"></i> New Batch
-            </button>
-          </div>
-          <div class="table-responsive">
-            <table class="production-table" id="batchesTable">
-              <thead>
-                <tr>
-                  <th>Batch ID</th>
-                  <th>Product</th>
-                  <th>Start Time</th>
-                  <th>End Time</th>
-                  <th>Quantity</th>
-                  <th>Supervisor</th>
-                  <th>Status</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>PROD-0425-01</td>
-                  <td>Full Cream Milk</td>
-                  <td>2025-04-25 06:00</td>
-                  <td>2025-04-25 09:30</td>
-                  <td>850 L</td>
-                  <td>Rajesh Kumar</td>
-                  <td><span class="status completed">Completed</span></td>
-                  <td>
-                    <button class="btn-icon view-batch">
-                      <i class="fas fa-eye"></i>
-                    </button>
-                    <button class="btn-icon delete-batch">
-                      <i class="fas fa-trash"></i>
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>PROD-0425-02</td>
-                  <td>Toned Milk</td>
-                  <td>2025-04-25 10:00</td>
-                  <td>2025-04-25 13:30</td>
-                  <td>750 L</td>
-                  <td>Anita Devi</td>
-                  <td><span class="status completed">Completed</span></td>
-                  <td>
-                    <button class="btn-icon view-batch">
-                      <i class="fas fa-eye"></i>
-                    </button>
-                    <button class="btn-icon delete-batch">
-                      <i class="fas fa-trash"></i>
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>PROD-0425-03</td>
-                  <td>Yogurt</td>
-                  <td>2025-04-25 14:00</td>
-                  <td>-</td>
-                  <td>250 L</td>
-                  <td>Mohammed Arif</td>
-                  <td><span class="status in-progress">In Progress</span></td>
-                  <td>
-                    <button class="btn-icon view-batch">
-                      <i class="fas fa-eye"></i>
-                    </button>
-                    <button class="btn-icon delete-batch">
-                      <i class="fas fa-trash"></i>
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        <!-- Add Production Batch Modal -->
-        <div id="batchModal" class="modal">
-          <div class="modal-content">
-            <span class="close">&times;</span>
-            <h3>Add New Production Batch</h3>
-            <form id="batchForm">
-              <div class="form-group">
-                <label for="productType">Product Type:</label>
-                <select id="productType" required>
-                  <option value="">Select Product</option>
-                  <option value="Full Cream Milk">Full Cream Milk</option>
-                  <option value="Toned Milk">Toned Milk</option>
-                  <option value="Double Toned Milk">Double Toned Milk</option>
-                  <option value="Yogurt">Yogurt</option>
-                  <option value="Butter">Butter</option>
-                  <option value="Cheese">Cheese</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="startTime">Start Time:</label>
-                <input type="datetime-local" id="startTime" required />
-              </div>
-              <div class="form-group">
-                <label for="endTime"
-                  >End Time (leave blank if in progress):</label
-                >
-                <input type="datetime-local" id="endTime" />
-              </div>
-              <div class="form-group">
-                <label for="batchQuantity">Quantity (L):</label>
-                <input type="number" id="batchQuantity" min="1" required />
-              </div>
-              <div class="form-group">
-                <label for="supervisor">Supervisor:</label>
-                <input type="text" id="supervisor" required />
-              </div>
-              <div class="form-group">
-                <label for="batchStatus">Status:</label>
-                <select id="batchStatus" required>
-                  <option value="scheduled">Scheduled</option>
-                  <option value="in-progress">In Progress</option>
-                  <option value="completed">Completed</option>
-                  <option value="cancelled">Cancelled</option>
-                </select>
-              </div>
-              <button type="submit" class="btn btn-primary">Add Batch</button>
-            </form>
-          </div>
-        </div>
-
-        <!-- Equipment Maintenance -->
-        <section class="production-section">
-          <h3>Equipment Maintenance</h3>
-          <div class="card-grid">
-            <div class="dashboard-card">
-              <div class="card-icon"><i class="fas fa-tools"></i></div>
-              <h4>Scheduled Maintenance</h4>
-              <h2>2</h2>
-              <p>Next: Apr 30, 2025</p>
-            </div>
-            <div class="dashboard-card">
-              <div class="card-icon">
-                <i class="fas fa-exclamation-circle"></i>
-              </div>
-              <h4>Equipment Alerts</h4>
-              <h2>1</h2>
-              <p class="red-text">Pasteurizer needs attention</p>
-            </div>
-          </div>
-          <div class="table-responsive">
-            <table class="production-table">
-              <thead>
-                <tr>
-                  <th>Equipment</th>
-                  <th>Status</th>
-                  <th>Last Maintenance</th>
-                  <th>Next Maintenance</th>
-                  <th>Responsible</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Pasteurizer Unit #1</td>
-                  <td><span class="status warning">Needs Attention</span></td>
-                  <td>2025-03-15</td>
-                  <td>2025-04-30</td>
-                  <td>Rajesh Kumar</td>
-                  <td>
-                    <button class="btn-icon">
-                      <i class="fas fa-wrench"></i>
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Homogenizer #2</td>
-                  <td><span class="status ok">Operational</span></td>
-                  <td>2025-04-10</td>
-                  <td>2025-05-10</td>
-                  <td>Anita Devi</td>
-                  <td>
-                    <button class="btn-icon">
-                      <i class="fas fa-wrench"></i>
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Packaging Machine #3</td>
-                  <td><span class="status ok">Operational</span></td>
-                  <td>2025-04-05</td>
-                  <td>2025-05-05</td>
-                  <td>Mohammed Arif</td>
-                  <td>
-                    <button class="btn-icon">
-                      <i class="fas fa-wrench"></i>
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-      </div>
-
       <!--SALES SECTION-->
       <div
         id="salesMarketingSection"
@@ -2002,93 +1757,2067 @@
       >
         <div class="dairy-banner">
           <h1>Sales & Marketing</h1>
+          <p>
+            Track sales performance, analyze trends, and optimize your marketing
+            strategies
+          </p>
         </div>
-        <h2>Sales & Marketing</h2>
 
-        <!-- Sales Overview -->
-        <section class="sm-section">
-          <h3>Sales Overview</h3>
-          <div class="smcard-grid">
-            <div class="dashboard-card">
-              <div class="card-icon"><i class="fas fa-rupee-sign"></i></div>
-              <h4>Total Sales (This Month)</h4>
-              <h2>₹4,75,000</h2>
-              <p class="green-text"><i class="fas fa-arrow-up"></i> 11%</p>
+        <!-- Sales Dashboard Tabs -->
+        <div class="sales-tabs-container">
+          <div class="sales-tabs">
+            <button class="sales-tab-btn active" data-tab="sales-overview">
+              <i class="fas fa-chart-line"></i> Sales Overview
+            </button>
+            <button class="sales-tab-btn" data-tab="marketing-campaigns">
+              <i class="fas fa-bullhorn"></i> Marketing Campaigns
+            </button>
+            <button class="sales-tab-btn" data-tab="customer-analytics">
+              <i class="fas fa-users"></i> Customer Analytics
+            </button>
+            <button class="sales-tab-btn" data-tab="distribution-channels">
+              <i class="fas fa-truck"></i> Distribution Channels
+            </button>
+          </div>
+        </div>
+
+        <!-- Sales Dashboard Content -->
+        <div class="sales-tab-content">
+          <!-- Sales Overview Tab -->
+          <div id="sales-overview" class="sales-tab-pane active">
+            <!-- Time Period Filter -->
+            <div class="sales-filter-container">
+              <div class="sales-period-filter">
+                <label>Time Period:</label>
+                <div class="sales-period-buttons">
+                  <button class="sales-period-btn active" data-period="daily">
+                    Daily
+                  </button>
+                  <button class="sales-period-btn" data-period="weekly">
+                    Weekly
+                  </button>
+                  <button class="sales-period-btn" data-period="monthly">
+                    Monthly
+                  </button>
+                  <button class="sales-period-btn" data-period="yearly">
+                    Yearly
+                  </button>
+                </div>
+              </div>
+              <div class="sales-date-filter">
+                <input
+                  type="date"
+                  id="salesStartDate"
+                  class="sales-date-input"
+                />
+                <span>to</span>
+                <input type="date" id="salesEndDate" class="sales-date-input" />
+                <button id="applyDateFilter" class="sales-filter-btn">
+                  Apply
+                </button>
+              </div>
             </div>
-            <div class="dashboard-card">
-              <div class="card-icon"><i class="fas fa-box-open"></i></div>
-              <h4>Units Sold</h4>
-              <h2>38,200 L</h2>
-              <p class="green-text"><i class="fas fa-arrow-up"></i> 8%</p>
+
+            <!-- Sales Summary Cards -->
+            <div class="sales-summary-cards">
+              <div class="sales-summary-card">
+                <div class="sales-card-icon">
+                  <i class="fas fa-shopping-cart"></i>
+                </div>
+                <div class="sales-card-info">
+                  <h4>Total Sales</h4>
+                  <p class="sales-card-value">₹8,75,250</p>
+                  <p class="sales-card-change positive">
+                    <i class="fas fa-arrow-up"></i> 15.2% vs last period
+                  </p>
+                </div>
+              </div>
+              <div class="sales-summary-card">
+                <div class="sales-card-icon"><i class="fas fa-box"></i></div>
+                <div class="sales-card-info">
+                  <h4>Units Sold</h4>
+                  <p class="sales-card-value">12,845</p>
+                  <p class="sales-card-change positive">
+                    <i class="fas fa-arrow-up"></i> 8.7% vs last period
+                  </p>
+                </div>
+              </div>
+              <div class="sales-summary-card">
+                <div class="sales-card-icon">
+                  <i class="fas fa-user-check"></i>
+                </div>
+                <div class="sales-card-info">
+                  <h4>Conversion Rate</h4>
+                  <p class="sales-card-value">24.8%</p>
+                  <p class="sales-card-change positive">
+                    <i class="fas fa-arrow-up"></i> 3.5% vs last period
+                  </p>
+                </div>
+              </div>
+              <div class="sales-summary-card">
+                <div class="sales-card-icon">
+                  <i class="fas fa-rupee-sign"></i>
+                </div>
+                <div class="sales-card-info">
+                  <h4>Avg. Order Value</h4>
+                  <p class="sales-card-value">₹682</p>
+                  <p class="sales-card-change positive">
+                    <i class="fas fa-arrow-up"></i> 5.8% vs last period
+                  </p>
+                </div>
+              </div>
             </div>
-            <div class="dashboard-card">
-              <div class="card-icon"><i class="fas fa-fill"></i></div>
-              <h4>Units Filled</h4>
-              <h2>33,200 L</h2>
-              <p class="green-text"><i class="fas fa-arrow-up"></i> 20%</p>
+
+            <!-- Revenue Trends Chart -->
+            <div class="sales-chart-container">
+              <div class="sales-chart-header">
+                <h3>Revenue Trends</h3>
+                <div class="sales-chart-actions">
+                  <button
+                    class="sales-chart-type-btn active"
+                    data-chart-type="line"
+                  >
+                    <i class="fas fa-chart-line"></i>
+                  </button>
+                  <button class="sales-chart-type-btn" data-chart-type="bar">
+                    <i class="fas fa-chart-bar"></i>
+                  </button>
+                  <button class="sales-export-btn">
+                    <i class="fas fa-download"></i> Export
+                  </button>
+                </div>
+              </div>
+              <div class="sales-chart-wrapper">
+                <canvas id="revenueTrendsChart"></canvas>
+              </div>
             </div>
-            <div class="dashboard-card">
-              <div class="card-icon"><i class="fas fa-store"></i></div>
-              <h4>Retail Outlets</h4>
-              <h2>126</h2>
-              <p class="red-text"><i class="fas fa-arrow-down"></i> 2%</p>
+
+            <!-- Sales Analytics Grid -->
+            <div class="sales-analytics-grid">
+              <!-- Best Selling Products -->
+              <div class="sales-analytics-card">
+                <div class="sales-analytics-header">
+                  <h3>Best Selling Products</h3>
+                  <button class="sales-view-all-btn">View All</button>
+                </div>
+                <div class="sales-product-list">
+                  <div class="sales-product-item">
+                    <div class="sales-product-info">
+                      <div class="sales-product-icon milk">
+                        <i class="fas fa-tint"></i>
+                      </div>
+                      <div>
+                        <h4>Full Cream Milk</h4>
+                        <p>5,240 units</p>
+                      </div>
+                    </div>
+                    <div class="sales-product-chart">
+                      <div class="sales-progress-bar">
+                        <div class="sales-progress" style="width: 85%"></div>
+                      </div>
+                      <p>₹2,62,000</p>
+                    </div>
+                  </div>
+                  <div class="sales-product-item">
+                    <div class="sales-product-info">
+                      <div class="sales-product-icon curd">
+                        <i class="fas fa-cheese"></i>
+                      </div>
+                      <div>
+                        <h4>Yogurt/Curd</h4>
+                        <p>3,850 units</p>
+                      </div>
+                    </div>
+                    <div class="sales-product-chart">
+                      <div class="sales-progress-bar">
+                        <div class="sales-progress" style="width: 72%"></div>
+                      </div>
+                      <p>₹1,92,500</p>
+                    </div>
+                  </div>
+                  <div class="sales-product-item">
+                    <div class="sales-product-info">
+                      <div class="sales-product-icon paneer">
+                        <i class="fas fa-square"></i>
+                      </div>
+                      <div>
+                        <h4>Paneer</h4>
+                        <p>2,120 units</p>
+                      </div>
+                    </div>
+                    <div class="sales-product-chart">
+                      <div class="sales-progress-bar">
+                        <div class="sales-progress" style="width: 65%"></div>
+                      </div>
+                      <p>₹1,69,600</p>
+                    </div>
+                  </div>
+                  <div class="sales-product-item">
+                    <div class="sales-product-info">
+                      <div class="sales-product-icon ghee">
+                        <i class="fas fa-oil-can"></i>
+                      </div>
+                      <div>
+                        <h4>Ghee</h4>
+                        <p>1,540 units</p>
+                      </div>
+                    </div>
+                    <div class="sales-product-chart">
+                      <div class="sales-progress-bar">
+                        <div class="sales-progress" style="width: 58%"></div>
+                      </div>
+                      <p>₹1,23,200</p>
+                    </div>
+                  </div>
+                  <div class="sales-product-item">
+                    <div class="sales-product-info">
+                      <div class="sales-product-icon butter">
+                        <i class="fas fa-cookie"></i>
+                      </div>
+                      <div>
+                        <h4>Butter</h4>
+                        <p>1,095 units</p>
+                      </div>
+                    </div>
+                    <div class="sales-product-chart">
+                      <div class="sales-progress-bar">
+                        <div class="sales-progress" style="width: 45%"></div>
+                      </div>
+                      <p>₹87,600</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Sales by Region -->
+              <div class="sales-analytics-card">
+                <div class="sales-analytics-header">
+                  <h3>Sales by Region</h3>
+                  <div class="sales-chart-actions">
+                    <button
+                      class="sales-chart-view-btn active"
+                      data-view="chart"
+                    >
+                      <i class="fas fa-chart-pie"></i>
+                    </button>
+                    <button class="sales-chart-view-btn" data-view="table">
+                      <i class="fas fa-table"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="sales-region-chart-view">
+                  <canvas id="salesByRegionChart"></canvas>
+                </div>
+                <div class="sales-region-table-view" style="display: none">
+                  <table class="sales-region-table">
+                    <thead>
+                      <tr>
+                        <th>Region</th>
+                        <th>Sales</th>
+                        <th>% of Total</th>
+                        <th>Growth</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>North</td>
+                        <td>₹2,45,070</td>
+                        <td>28%</td>
+                        <td class="positive">+12.5%</td>
+                      </tr>
+                      <tr>
+                        <td>South</td>
+                        <td>₹2,10,060</td>
+                        <td>24%</td>
+                        <td class="positive">+15.8%</td>
+                      </tr>
+                      <tr>
+                        <td>East</td>
+                        <td>₹1,75,050</td>
+                        <td>20%</td>
+                        <td class="positive">+8.3%</td>
+                      </tr>
+                      <tr>
+                        <td>West</td>
+                        <td>₹1,57,545</td>
+                        <td>18%</td>
+                        <td class="positive">+10.2%</td>
+                      </tr>
+                      <tr>
+                        <td>Central</td>
+                        <td>₹87,525</td>
+                        <td>10%</td>
+                        <td class="positive">+5.7%</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sales Comparison -->
+            <div class="sales-comparison-container">
+              <div class="sales-comparison-header">
+                <h3>Period Comparison</h3>
+                <div class="sales-comparison-legend">
+                  <div class="sales-legend-item">
+                    <span class="sales-legend-color current"></span>
+                    <span>Current Period</span>
+                  </div>
+                  <div class="sales-legend-item">
+                    <span class="sales-legend-color previous"></span>
+                    <span>Previous Period</span>
+                  </div>
+                </div>
+              </div>
+              <div class="sales-comparison-chart-wrapper">
+                <canvas id="salesComparisonChart"></canvas>
+              </div>
             </div>
           </div>
-        </section>
 
-        <!-- Marketing Campaigns -->
-        <section class="sm-section">
-          <h3>Ongoing Marketing Campaigns</h3>
-          <table class="sm-table">
-            <thead>
-              <tr>
-                <th>Campaign</th>
-                <th>Platform</th>
-                <th>Reach</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>“Fresh Milk, Daily Health”</td>
-                <td>Facebook</td>
-                <td>22,000</td>
-                <td><span class="status in-progress">Running</span></td>
-              </tr>
-              <tr>
-                <td>“Taste the Tradition”</td>
-                <td>Instagram</td>
-                <td>15,500</td>
-                <td><span class="status open">New</span></td>
-              </tr>
-              <tr>
-                <td>“Village to City Drive”</td>
-                <td>Local Radio</td>
-                <td>9,800</td>
-                <td><span class="status closed">Ended</span></td>
-              </tr>
-            </tbody>
-          </table>
-        </section>
+          <!-- Marketing Campaigns Tab -->
+          <div id="marketing-campaigns" class="sales-tab-pane">
+            <!-- Campaign Filter Controls -->
+            <div class="campaign-filter-container">
+              <div class="campaign-filter-group">
+                <label>Filter by Status:</label>
+                <div class="campaign-filter-buttons">
+                  <button class="campaign-filter-btn active" data-filter="all">
+                    All
+                  </button>
+                  <button class="campaign-filter-btn" data-filter="active">
+                    Active
+                  </button>
+                  <button class="campaign-filter-btn" data-filter="scheduled">
+                    Scheduled
+                  </button>
+                  <button class="campaign-filter-btn" data-filter="completed">
+                    Completed
+                  </button>
+                </div>
+              </div>
+              <div class="campaign-search">
+                <input
+                  type="text"
+                  id="campaignSearch"
+                  placeholder="Search campaigns..."
+                  class="campaign-search-input"
+                />
+                <button class="campaign-search-btn">
+                  <i class="fas fa-search"></i>
+                </button>
+              </div>
+              <button class="campaign-add-btn" id="addCampaignBtn">
+                <i class="fas fa-plus"></i> New Campaign
+              </button>
+            </div>
 
-        <!-- Customer Engagement -->
-        <section class="sm-section">
-          <h3>Customer Engagement</h3>
-          <ul class="communication-list">
-            <li>
-              <strong>WhatsApp Campaign:</strong> New product alert sent to
-              3,000 customers. <span class="date">Apr 13</span>
-            </li>
-            <li>
-              <strong>Referral Program:</strong> 450 new customers through
-              referral codes. <span class="date">Apr 10</span>
-            </li>
-            <li>
-              <strong>Email Newsletter:</strong> Open rate at 43%.
-              <span class="date">Apr 9</span>
-            </li>
-          </ul>
-        </section>
+            <!-- Campaign Summary Cards -->
+            <div class="campaign-summary-cards">
+              <div class="campaign-summary-card">
+                <div class="campaign-card-icon">
+                  <i class="fas fa-bullhorn"></i>
+                </div>
+                <div class="campaign-card-info">
+                  <h4>Active Campaigns</h4>
+                  <p class="campaign-card-value">5</p>
+                  <p class="campaign-card-change positive">
+                    <i class="fas fa-arrow-up"></i> 2 more than last month
+                  </p>
+                </div>
+              </div>
+              <div class="campaign-summary-card">
+                <div class="campaign-card-icon">
+                  <i class="fas fa-rupee-sign"></i>
+                </div>
+                <div class="campaign-card-info">
+                  <h4>Campaign Budget</h4>
+                  <p class="campaign-card-value">₹2,50,000</p>
+                  <p class="campaign-card-change positive">
+                    <i class="fas fa-arrow-up"></i> 15% increase
+                  </p>
+                </div>
+              </div>
+              <div class="campaign-summary-card">
+                <div class="campaign-card-icon">
+                  <i class="fas fa-chart-pie"></i>
+                </div>
+                <div class="campaign-card-info">
+                  <h4>Avg. ROI</h4>
+                  <p class="campaign-card-value">215%</p>
+                  <p class="campaign-card-change positive">
+                    <i class="fas fa-arrow-up"></i> 12% increase
+                  </p>
+                </div>
+              </div>
+              <div class="campaign-summary-card">
+                <div class="campaign-card-icon">
+                  <i class="fas fa-users"></i>
+                </div>
+                <div class="campaign-card-info">
+                  <h4>New Customers</h4>
+                  <p class="campaign-card-value">320</p>
+                  <p class="campaign-card-change positive">
+                    <i class="fas fa-arrow-up"></i> 8% increase
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Campaign Performance Chart -->
+            <div class="campaign-performance-container">
+              <div class="campaign-section-header">
+                <h3>Campaign Performance</h3>
+                <div class="campaign-view-options">
+                  <button
+                    class="campaign-view-btn active"
+                    data-view="performance"
+                  >
+                    Performance
+                  </button>
+                  <button class="campaign-view-btn" data-view="budget">
+                    Budget Allocation
+                  </button>
+                </div>
+              </div>
+              <div class="campaign-chart-container">
+                <div
+                  id="campaign-performance-view"
+                  class="campaign-chart-view active"
+                >
+                  <canvas id="campaignPerformanceChart"></canvas>
+                </div>
+                <div id="campaign-budget-view" class="campaign-chart-view">
+                  <canvas id="campaignBudgetChart"></canvas>
+                </div>
+              </div>
+            </div>
+
+            <!-- Active Campaigns Table -->
+            <div class="campaign-list-container">
+              <div class="campaign-section-header">
+                <h3>Marketing Campaigns</h3>
+                <div class="campaign-actions">
+                  <button class="campaign-export-btn">
+                    <i class="fas fa-download"></i> Export
+                  </button>
+                </div>
+              </div>
+              <div class="campaign-table-wrapper">
+                <table class="campaign-table">
+                  <thead>
+                    <tr>
+                      <th>Campaign Name</th>
+                      <th>Type</th>
+                      <th>Status</th>
+                      <th>Start Date</th>
+                      <th>End Date</th>
+                      <th>Budget</th>
+                      <th>ROI</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="campaign-row" data-status="active">
+                      <td>
+                        <div class="campaign-name">
+                          <div class="campaign-icon digital">
+                            <i class="fas fa-globe"></i>
+                          </div>
+                          <div>
+                            <p class="campaign-title">
+                              Farm Fresh Digital Campaign
+                            </p>
+                            <p class="campaign-subtitle">Social Media & Web</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td>Digital</td>
+                      <td>
+                        <span class="campaign-status active">Active</span>
+                      </td>
+                      <td>15 Jun 2023</td>
+                      <td>15 Aug 2023</td>
+                      <td>₹75,000</td>
+                      <td class="campaign-roi positive">245%</td>
+                      <td>
+                        <div class="campaign-actions-cell">
+                          <button class="campaign-action-btn" title="Edit">
+                            <i class="fas fa-edit"></i>
+                          </button>
+                          <button
+                            class="campaign-action-btn"
+                            title="View Report"
+                          >
+                            <i class="fas fa-chart-bar"></i>
+                          </button>
+                          <button
+                            class="campaign-action-btn"
+                            title="More Options"
+                          >
+                            <i class="fas fa-ellipsis-v"></i>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr class="campaign-row" data-status="active">
+                      <td>
+                        <div class="campaign-name">
+                          <div class="campaign-icon print">
+                            <i class="fas fa-newspaper"></i>
+                          </div>
+                          <div>
+                            <p class="campaign-title">
+                              Organic Milk Print Campaign
+                            </p>
+                            <p class="campaign-subtitle">
+                              Newspapers & Magazines
+                            </p>
+                          </div>
+                        </div>
+                      </td>
+                      <td>Print</td>
+                      <td>
+                        <span class="campaign-status active">Active</span>
+                      </td>
+                      <td>01 Jul 2023</td>
+                      <td>31 Jul 2023</td>
+                      <td>₹45,000</td>
+                      <td class="campaign-roi positive">180%</td>
+                      <td>
+                        <div class="campaign-actions-cell">
+                          <button class="campaign-action-btn" title="Edit">
+                            <i class="fas fa-edit"></i>
+                          </button>
+                          <button
+                            class="campaign-action-btn"
+                            title="View Report"
+                          >
+                            <i class="fas fa-chart-bar"></i>
+                          </button>
+                          <button
+                            class="campaign-action-btn"
+                            title="More Options"
+                          >
+                            <i class="fas fa-ellipsis-v"></i>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr class="campaign-row" data-status="active">
+                      <td>
+                        <div class="campaign-name">
+                          <div class="campaign-icon event">
+                            <i class="fas fa-calendar-day"></i>
+                          </div>
+                          <div>
+                            <p class="campaign-title">Dairy Farm Open Day</p>
+                            <p class="campaign-subtitle">Public Event</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td>Event</td>
+                      <td>
+                        <span class="campaign-status active">Active</span>
+                      </td>
+                      <td>10 Jul 2023</td>
+                      <td>10 Jul 2023</td>
+                      <td>₹35,000</td>
+                      <td class="campaign-roi positive">195%</td>
+                      <td>
+                        <div class="campaign-actions-cell">
+                          <button class="campaign-action-btn" title="Edit">
+                            <i class="fas fa-edit"></i>
+                          </button>
+                          <button
+                            class="campaign-action-btn"
+                            title="View Report"
+                          >
+                            <i class="fas fa-chart-bar"></i>
+                          </button>
+                          <button
+                            class="campaign-action-btn"
+                            title="More Options"
+                          >
+                            <i class="fas fa-ellipsis-v"></i>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr class="campaign-row" data-status="scheduled">
+                      <td>
+                        <div class="campaign-name">
+                          <div class="campaign-icon tv">
+                            <i class="fas fa-tv"></i>
+                          </div>
+                          <div>
+                            <p class="campaign-title">
+                              Premium Dairy TV Commercial
+                            </p>
+                            <p class="campaign-subtitle">Television</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td>TV</td>
+                      <td>
+                        <span class="campaign-status scheduled">Scheduled</span>
+                      </td>
+                      <td>01 Aug 2023</td>
+                      <td>31 Aug 2023</td>
+                      <td>₹1,20,000</td>
+                      <td class="campaign-roi">-</td>
+                      <td>
+                        <div class="campaign-actions-cell">
+                          <button class="campaign-action-btn" title="Edit">
+                            <i class="fas fa-edit"></i>
+                          </button>
+                          <button
+                            class="campaign-action-btn"
+                            title="View Details"
+                          >
+                            <i class="fas fa-info-circle"></i>
+                          </button>
+                          <button
+                            class="campaign-action-btn"
+                            title="More Options"
+                          >
+                            <i class="fas fa-ellipsis-v"></i>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr class="campaign-row" data-status="scheduled">
+                      <td>
+                        <div class="campaign-name">
+                          <div class="campaign-icon partnership">
+                            <i class="fas fa-handshake"></i>
+                          </div>
+                          <div>
+                            <p class="campaign-title">
+                              School Nutrition Partnership
+                            </p>
+                            <p class="campaign-subtitle">
+                              Educational Outreach
+                            </p>
+                          </div>
+                        </div>
+                      </td>
+                      <td>Partnership</td>
+                      <td>
+                        <span class="campaign-status scheduled">Scheduled</span>
+                      </td>
+                      <td>15 Aug 2023</td>
+                      <td>15 Nov 2023</td>
+                      <td>₹50,000</td>
+                      <td class="campaign-roi">-</td>
+                      <td>
+                        <div class="campaign-actions-cell">
+                          <button class="campaign-action-btn" title="Edit">
+                            <i class="fas fa-edit"></i>
+                          </button>
+                          <button
+                            class="campaign-action-btn"
+                            title="View Details"
+                          >
+                            <i class="fas fa-info-circle"></i>
+                          </button>
+                          <button
+                            class="campaign-action-btn"
+                            title="More Options"
+                          >
+                            <i class="fas fa-ellipsis-v"></i>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr class="campaign-row" data-status="completed">
+                      <td>
+                        <div class="campaign-name">
+                          <div class="campaign-icon radio">
+                            <i class="fas fa-broadcast-tower"></i>
+                          </div>
+                          <div>
+                            <p class="campaign-title">Local Radio Promotion</p>
+                            <p class="campaign-subtitle">Radio Ads</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td>Radio</td>
+                      <td>
+                        <span class="campaign-status completed">Completed</span>
+                      </td>
+                      <td>01 May 2023</td>
+                      <td>31 May 2023</td>
+                      <td>₹25,000</td>
+                      <td class="campaign-roi positive">210%</td>
+                      <td>
+                        <div class="campaign-actions-cell">
+                          <button
+                            class="campaign-action-btn"
+                            title="View Report"
+                          >
+                            <i class="fas fa-chart-bar"></i>
+                          </button>
+                          <button class="campaign-action-btn" title="Duplicate">
+                            <i class="fas fa-copy"></i>
+                          </button>
+                          <button
+                            class="campaign-action-btn"
+                            title="More Options"
+                          >
+                            <i class="fas fa-ellipsis-v"></i>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr class="campaign-row" data-status="completed">
+                      <td>
+                        <div class="campaign-name">
+                          <div class="campaign-icon promotion">
+                            <i class="fas fa-tags"></i>
+                          </div>
+                          <div>
+                            <p class="campaign-title">
+                              Summer Discount Promotion
+                            </p>
+                            <p class="campaign-subtitle">In-store & Online</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td>Promotion</td>
+                      <td>
+                        <span class="campaign-status completed">Completed</span>
+                      </td>
+                      <td>01 Apr 2023</td>
+                      <td>30 Apr 2023</td>
+                      <td>₹30,000</td>
+                      <td class="campaign-roi positive">235%</td>
+                      <td>
+                        <div class="campaign-actions-cell">
+                          <button
+                            class="campaign-action-btn"
+                            title="View Report"
+                          >
+                            <i class="fas fa-chart-bar"></i>
+                          </button>
+                          <button class="campaign-action-btn" title="Duplicate">
+                            <i class="fas fa-copy"></i>
+                          </button>
+                          <button
+                            class="campaign-action-btn"
+                            title="More Options"
+                          >
+                            <i class="fas fa-ellipsis-v"></i>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="campaign-pagination">
+                <button class="campaign-pagination-btn" disabled>
+                  <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="campaign-pagination-btn active">1</button>
+                <button class="campaign-pagination-btn">2</button>
+                <button class="campaign-pagination-btn">3</button>
+                <button class="campaign-pagination-btn">
+                  <i class="fas fa-chevron-right"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Campaign Audience Insights -->
+            <div class="campaign-audience-container">
+              <div class="campaign-section-header">
+                <h3>Audience Insights</h3>
+              </div>
+              <div class="campaign-audience-grid">
+                <div class="campaign-audience-card">
+                  <h4>Customer Demographics</h4>
+                  <div class="campaign-audience-chart-container">
+                    <canvas id="audienceDemographicsChart"></canvas>
+                  </div>
+                </div>
+                <div class="campaign-audience-card">
+                  <h4>Geographic Distribution</h4>
+                  <div class="campaign-audience-chart-container">
+                    <canvas id="audienceGeographyChart"></canvas>
+                  </div>
+                </div>
+                <div class="campaign-audience-card">
+                  <h4>Product Preferences</h4>
+                  <div class="campaign-audience-chart-container">
+                    <canvas id="audiencePreferencesChart"></canvas>
+                  </div>
+                </div>
+                <div class="campaign-audience-card">
+                  <h4>Engagement Channels</h4>
+                  <div class="campaign-audience-chart-container">
+                    <canvas id="audienceChannelsChart"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Campaign Modal (Hidden by default) -->
+            <div id="campaignModal" class="campaign-modal">
+              <div class="campaign-modal-content">
+                <div class="campaign-modal-header">
+                  <h3>Add New Campaign</h3>
+                  <button class="campaign-modal-close">&times;</button>
+                </div>
+                <div class="campaign-modal-body">
+                  <form id="campaignForm">
+                    <div class="campaign-form-row">
+                      <div class="campaign-form-group">
+                        <label for="campaignName">Campaign Name</label>
+                        <input
+                          type="text"
+                          id="campaignName"
+                          class="campaign-form-input"
+                          placeholder="Enter campaign name"
+                        />
+                      </div>
+                      <div class="campaign-form-group">
+                        <label for="campaignType">Campaign Type</label>
+                        <select id="campaignType" class="campaign-form-select">
+                          <option value="">Select type</option>
+                          <option value="Digital">Digital</option>
+                          <option value="Print">Print</option>
+                          <option value="TV">TV</option>
+                          <option value="Radio">Radio</option>
+                          <option value="Event">Event</option>
+                          <option value="Partnership">Partnership</option>
+                          <option value="Promotion">Promotion</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="campaign-form-row">
+                      <div class="campaign-form-group">
+                        <label for="campaignStartDate">Start Date</label>
+                        <input
+                          type="date"
+                          id="campaignStartDate"
+                          class="campaign-form-input"
+                        />
+                      </div>
+                      <div class="campaign-form-group">
+                        <label for="campaignEndDate">End Date</label>
+                        <input
+                          type="date"
+                          id="campaignEndDate"
+                          class="campaign-form-input"
+                        />
+                      </div>
+                    </div>
+                    <div class="campaign-form-row">
+                      <div class="campaign-form-group">
+                        <label for="campaignBudget">Budget (₹)</label>
+                        <input
+                          type="number"
+                          id="campaignBudget"
+                          class="campaign-form-input"
+                          placeholder="Enter budget amount"
+                        />
+                      </div>
+                      <div class="campaign-form-group">
+                        <label for="campaignStatus">Status</label>
+                        <select
+                          id="campaignStatus"
+                          class="campaign-form-select"
+                        >
+                          <option value="scheduled">Scheduled</option>
+                          <option value="active">Active</option>
+                          <option value="completed">Completed</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="campaign-form-group">
+                      <label for="campaignDescription">Description</label>
+                      <textarea
+                        id="campaignDescription"
+                        class="campaign-form-textarea"
+                        rows="4"
+                        placeholder="Enter campaign description"
+                      ></textarea>
+                    </div>
+                    <div class="campaign-form-group">
+                      <label for="campaignTargetAudience"
+                        >Target Audience</label
+                      >
+                      <select
+                        id="campaignTargetAudience"
+                        class="campaign-form-select"
+                        multiple
+                      >
+                        <option value="retailers">Retailers</option>
+                        <option value="distributors">Distributors</option>
+                        <option value="consumers">Direct Consumers</option>
+                        <option value="institutions">Institutions</option>
+                        <option value="restaurants">Restaurants & Cafes</option>
+                      </select>
+                      <small>Hold Ctrl/Cmd to select multiple</small>
+                    </div>
+                  </form>
+                </div>
+                <div class="campaign-modal-footer">
+                  <button class="campaign-modal-btn secondary">Cancel</button>
+                  <button class="campaign-modal-btn primary">
+                    Save Campaign
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Customer Analytics Tab -->
+          <div id="customer-analytics" class="sales-tab-pane">
+            <!-- Customer Analytics Header Controls -->
+            <div class="customer-controls-container">
+              <div class="customer-period-selector">
+                <label>Time Period:</label>
+                <div class="customer-period-buttons">
+                  <button class="customer-period-btn" data-period="30">
+                    Last 30 Days
+                  </button>
+                  <button class="customer-period-btn active" data-period="90">
+                    Last 90 Days
+                  </button>
+                  <button class="customer-period-btn" data-period="180">
+                    Last 6 Months
+                  </button>
+                  <button class="customer-period-btn" data-period="365">
+                    Last Year
+                  </button>
+                </div>
+              </div>
+              <div class="customer-segment-selector">
+                <label>Customer Segment:</label>
+                <select class="customer-segment-select">
+                  <option value="all">All Segments</option>
+                  <option value="retail">Retail Customers</option>
+                  <option value="wholesale">Wholesale Buyers</option>
+                  <option value="distributors">Distributors</option>
+                  <option value="institutions">Institutions</option>
+                </select>
+              </div>
+              <div class="customer-actions">
+                <button class="customer-export-btn">
+                  <i class="fas fa-download"></i> Export Report
+                </button>
+              </div>
+            </div>
+
+            <!-- Customer Overview Cards -->
+            <div class="customer-overview-cards">
+              <div class="customer-card">
+                <div class="customer-card-icon">
+                  <i class="fas fa-users"></i>
+                </div>
+                <div class="customer-card-content">
+                  <h4>Total Customers</h4>
+                  <p class="customer-card-value">8,542</p>
+                  <div class="customer-card-trend positive">
+                    <i class="fas fa-arrow-up"></i>
+                    <span>12.3%</span>
+                  </div>
+                </div>
+              </div>
+              <div class="customer-card">
+                <div class="customer-card-icon">
+                  <i class="fas fa-user-plus"></i>
+                </div>
+                <div class="customer-card-content">
+                  <h4>New Customers</h4>
+                  <p class="customer-card-value">1,245</p>
+                  <div class="customer-card-trend positive">
+                    <i class="fas fa-arrow-up"></i>
+                    <span>8.7%</span>
+                  </div>
+                </div>
+              </div>
+              <div class="customer-card">
+                <div class="customer-card-icon">
+                  <i class="fas fa-sync-alt"></i>
+                </div>
+                <div class="customer-card-content">
+                  <h4>Retention Rate</h4>
+                  <p class="customer-card-value">78.5%</p>
+                  <div class="customer-card-trend positive">
+                    <i class="fas fa-arrow-up"></i>
+                    <span>3.2%</span>
+                  </div>
+                </div>
+              </div>
+              <div class="customer-card">
+                <div class="customer-card-icon">
+                  <i class="fas fa-rupee-sign"></i>
+                </div>
+                <div class="customer-card-content">
+                  <h4>Avg. Order Value</h4>
+                  <p class="customer-card-value">₹1,850</p>
+                  <div class="customer-card-trend positive">
+                    <i class="fas fa-arrow-up"></i>
+                    <span>5.4%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Customer Growth Chart -->
+            <div class="customer-growth-container">
+              <div class="customer-section-header">
+                <h3>Customer Growth Trends</h3>
+                <div class="customer-view-toggle">
+                  <button class="customer-view-btn active" data-view="growth">
+                    Growth
+                  </button>
+                  <button class="customer-view-btn" data-view="retention">
+                    Retention
+                  </button>
+                </div>
+              </div>
+              <div class="customer-chart-container">
+                <canvas id="customerGrowthChart"></canvas>
+              </div>
+            </div>
+
+            <!-- Customer Segments and Demographics -->
+            <div class="customer-segments-grid">
+              <!-- Customer Segments -->
+              <div class="customer-segments-container">
+                <div class="customer-section-header">
+                  <h3>Customer Segments</h3>
+                </div>
+                <div class="customer-segments-chart-container">
+                  <canvas id="customerSegmentsChart"></canvas>
+                </div>
+                <div class="customer-segments-legend">
+                  <div class="customer-segment-item">
+                    <span class="customer-segment-color retail"></span>
+                    <div class="customer-segment-info">
+                      <p class="customer-segment-name">Retail Customers</p>
+                      <p class="customer-segment-value">45%</p>
+                    </div>
+                  </div>
+                  <div class="customer-segment-item">
+                    <span class="customer-segment-color wholesale"></span>
+                    <div class="customer-segment-info">
+                      <p class="customer-segment-name">Wholesale Buyers</p>
+                      <p class="customer-segment-value">30%</p>
+                    </div>
+                  </div>
+                  <div class="customer-segment-item">
+                    <span class="customer-segment-color distributors"></span>
+                    <div class="customer-segment-info">
+                      <p class="customer-segment-name">Distributors</p>
+                      <p class="customer-segment-value">15%</p>
+                    </div>
+                  </div>
+                  <div class="customer-segment-item">
+                    <span class="customer-segment-color institutions"></span>
+                    <div class="customer-segment-info">
+                      <p class="customer-segment-name">Institutions</p>
+                      <p class="customer-segment-value">10%</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Customer Demographics -->
+              <div class="customer-demographics-container">
+                <div class="customer-section-header">
+                  <h3>Customer Demographics</h3>
+                </div>
+                <div class="customer-demographics-tabs">
+                  <button
+                    class="customer-demographics-tab active"
+                    data-tab="age"
+                  >
+                    Age
+                  </button>
+                  <button class="customer-demographics-tab" data-tab="location">
+                    Location
+                  </button>
+                  <button class="customer-demographics-tab" data-tab="type">
+                    Type
+                  </button>
+                </div>
+                <div class="customer-demographics-content">
+                  <div
+                    id="age-tab"
+                    class="customer-demographics-tab-content active"
+                  >
+                    <div class="customer-demographics-chart-container">
+                      <canvas id="customerAgeChart"></canvas>
+                    </div>
+                  </div>
+                  <div
+                    id="location-tab"
+                    class="customer-demographics-tab-content"
+                  >
+                    <div class="customer-demographics-chart-container">
+                      <canvas id="customerLocationChart"></canvas>
+                    </div>
+                  </div>
+                  <div id="type-tab" class="customer-demographics-tab-content">
+                    <div class="customer-demographics-chart-container">
+                      <canvas id="customerTypeChart"></canvas>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Customer Behavior Analysis -->
+            <div class="customer-behavior-container">
+              <div class="customer-section-header">
+                <h3>Customer Behavior Analysis</h3>
+              </div>
+              <div class="customer-behavior-grid">
+                <!-- Purchase Frequency -->
+                <div class="customer-behavior-card">
+                  <h4>Purchase Frequency</h4>
+                  <div class="customer-behavior-chart-container">
+                    <canvas id="purchaseFrequencyChart"></canvas>
+                  </div>
+                </div>
+
+                <!-- Product Preferences -->
+                <div class="customer-behavior-card">
+                  <h4>Product Preferences</h4>
+                  <div class="customer-behavior-chart-container">
+                    <canvas id="productPreferencesChart"></canvas>
+                  </div>
+                </div>
+
+                <!-- Purchase Time -->
+                <div class="customer-behavior-card">
+                  <h4>Purchase Time</h4>
+                  <div class="customer-behavior-chart-container">
+                    <canvas id="purchaseTimeChart"></canvas>
+                  </div>
+                </div>
+
+                <!-- Payment Methods -->
+                <div class="customer-behavior-card">
+                  <h4>Payment Methods</h4>
+                  <div class="customer-behavior-chart-container">
+                    <canvas id="paymentMethodsChart"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Top Customers Table -->
+            <div class="customer-top-container">
+              <div class="customer-section-header">
+                <h3>Top Customers</h3>
+                <div class="customer-top-actions">
+                  <select class="customer-top-filter">
+                    <option value="revenue">By Revenue</option>
+                    <option value="volume">By Volume</option>
+                    <option value="frequency">By Frequency</option>
+                  </select>
+                  <button class="customer-view-all-btn">
+                    View All Customers
+                  </button>
+                </div>
+              </div>
+              <div class="customer-table-wrapper">
+                <table class="customer-table">
+                  <thead>
+                    <tr>
+                      <th>Customer</th>
+                      <th>Segment</th>
+                      <th>Location</th>
+                      <th>Total Orders</th>
+                      <th>Total Revenue</th>
+                      <th>Avg. Order Value</th>
+                      <th>Last Purchase</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div class="customer-name">
+                          <div class="customer-avatar">
+                            <img
+                              src="https://i.pravatar.cc/40?img=1"
+                              alt="Customer"
+                            />
+                          </div>
+                          <div>
+                            <p class="customer-title">
+                              Ganesh Dairy Distributors
+                            </p>
+                            <p class="customer-subtitle">Since Jan 2020</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td>Distributor</td>
+                      <td>Chennai</td>
+                      <td>245</td>
+                      <td>₹12,85,000</td>
+                      <td>₹5,245</td>
+                      <td>2 days ago</td>
+                      <td>
+                        <span class="customer-status active">Active</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="customer-name">
+                          <div class="customer-avatar">
+                            <img
+                              src="https://i.pravatar.cc/40?img=2"
+                              alt="Customer"
+                            />
+                          </div>
+                          <div>
+                            <p class="customer-title">
+                              Lakshmi Supermarket Chain
+                            </p>
+                            <p class="customer-subtitle">Since Mar 2019</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td>Wholesale</td>
+                      <td>Bangalore</td>
+                      <td>198</td>
+                      <td>₹9,45,000</td>
+                      <td>₹4,773</td>
+                      <td>5 days ago</td>
+                      <td>
+                        <span class="customer-status active">Active</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="customer-name">
+                          <div class="customer-avatar">
+                            <img
+                              src="https://i.pravatar.cc/40?img=3"
+                              alt="Customer"
+                            />
+                          </div>
+                          <div>
+                            <p class="customer-title">Sunshine Hotels Group</p>
+                            <p class="customer-subtitle">Since Nov 2021</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td>Institution</td>
+                      <td>Hyderabad</td>
+                      <td>156</td>
+                      <td>₹7,82,000</td>
+                      <td>₹5,013</td>
+                      <td>1 day ago</td>
+                      <td>
+                        <span class="customer-status active">Active</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="customer-name">
+                          <div class="customer-avatar">
+                            <img
+                              src="https://i.pravatar.cc/40?img=4"
+                              alt="Customer"
+                            />
+                          </div>
+                          <div>
+                            <p class="customer-title">Fresh Mart Stores</p>
+                            <p class="customer-subtitle">Since Aug 2020</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td>Retail</td>
+                      <td>Mumbai</td>
+                      <td>132</td>
+                      <td>₹6,45,000</td>
+                      <td>₹4,886</td>
+                      <td>3 days ago</td>
+                      <td>
+                        <span class="customer-status active">Active</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="customer-name">
+                          <div class="customer-avatar">
+                            <img
+                              src="https://i.pravatar.cc/40?img=5"
+                              alt="Customer"
+                            />
+                          </div>
+                          <div>
+                            <p class="customer-title">Green Valley Resorts</p>
+                            <p class="customer-subtitle">Since Feb 2022</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td>Institution</td>
+                      <td>Coimbatore</td>
+                      <td>98</td>
+                      <td>₹5,25,000</td>
+                      <td>₹5,357</td>
+                      <td>7 days ago</td>
+                      <td>
+                        <span class="customer-status inactive">Inactive</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="customer-table-pagination">
+                <button class="customer-pagination-btn" disabled>
+                  <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="customer-pagination-btn active">1</button>
+                <button class="customer-pagination-btn">2</button>
+                <button class="customer-pagination-btn">3</button>
+                <button class="customer-pagination-btn">
+                  <i class="fas fa-chevron-right"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Customer Feedback Analysis -->
+            <div class="customer-feedback-container">
+              <div class="customer-section-header">
+                <h3>Customer Feedback Analysis</h3>
+              </div>
+              <div class="customer-feedback-grid">
+                <!-- Satisfaction Score -->
+                <div class="customer-feedback-card">
+                  <div class="customer-feedback-header">
+                    <h4>Customer Satisfaction</h4>
+                    <div class="customer-satisfaction-score">
+                      <span class="score-value">4.7</span>
+                      <span class="score-max">/5</span>
+                    </div>
+                  </div>
+                  <div class="customer-satisfaction-bars">
+                    <div class="satisfaction-bar-item">
+                      <div class="satisfaction-label">
+                        <span class="star-rating">
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                        </span>
+                        <span class="satisfaction-percent">68%</span>
+                      </div>
+                      <div class="satisfaction-bar-bg">
+                        <div
+                          class="satisfaction-bar-fill"
+                          style="width: 68%"
+                        ></div>
+                      </div>
+                    </div>
+                    <div class="satisfaction-bar-item">
+                      <div class="satisfaction-label">
+                        <span class="star-rating">
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                        </span>
+                        <span class="satisfaction-percent">22%</span>
+                      </div>
+                      <div class="satisfaction-bar-bg">
+                        <div
+                          class="satisfaction-bar-fill"
+                          style="width: 22%"
+                        ></div>
+                      </div>
+                    </div>
+                    <div class="satisfaction-bar-item">
+                      <div class="satisfaction-label">
+                        <span class="star-rating">
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                        </span>
+                        <span class="satisfaction-percent">7%</span>
+                      </div>
+                      <div class="satisfaction-bar-bg">
+                        <div
+                          class="satisfaction-bar-fill"
+                          style="width: 7%"
+                        ></div>
+                      </div>
+                    </div>
+                    <div class="satisfaction-bar-item">
+                      <div class="satisfaction-label">
+                        <span class="star-rating">
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                        </span>
+                        <span class="satisfaction-percent">2%</span>
+                      </div>
+                      <div class="satisfaction-bar-bg">
+                        <div
+                          class="satisfaction-bar-fill"
+                          style="width: 2%"
+                        ></div>
+                      </div>
+                    </div>
+                    <div class="satisfaction-bar-item">
+                      <div class="satisfaction-label">
+                        <span class="star-rating">
+                          <i class="fas fa-star"></i>
+                        </span>
+                        <span class="satisfaction-percent">1%</span>
+                      </div>
+                      <div class="satisfaction-bar-bg">
+                        <div
+                          class="satisfaction-bar-fill"
+                          style="width: 1%"
+                        ></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Feedback Categories -->
+                <div class="customer-feedback-card">
+                  <h4>Feedback Categories</h4>
+                  <div class="customer-feedback-chart-container">
+                    <canvas id="feedbackCategoriesChart"></canvas>
+                  </div>
+                </div>
+
+                <!-- Recent Feedback -->
+                <div class="customer-feedback-card feedback-list">
+                  <h4>Recent Feedback</h4>
+                  <div class="customer-feedback-list">
+                    <div class="customer-feedback-item">
+                      <div class="feedback-header">
+                        <div class="feedback-customer">
+                          <img
+                            src="https://i.pravatar.cc/30?img=6"
+                            alt="Customer"
+                          />
+                          <span>Raj Kumar</span>
+                        </div>
+                        <div class="feedback-rating">
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                        </div>
+                      </div>
+                      <p class="feedback-text">
+                        "The milk quality is consistently excellent. Very happy
+                        with the freshness and taste."
+                      </p>
+                      <p class="feedback-date">2 days ago</p>
+                    </div>
+                    <div class="customer-feedback-item">
+                      <div class="feedback-header">
+                        <div class="feedback-customer">
+                          <img
+                            src="https://i.pravatar.cc/30?img=7"
+                            alt="Customer"
+                          />
+                          <span>Priya Sharma</span>
+                        </div>
+                        <div class="feedback-rating">
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="far fa-star"></i>
+                        </div>
+                      </div>
+                      <p class="feedback-text">
+                        "Great products but sometimes delivery is delayed. Would
+                        appreciate more punctual service."
+                      </p>
+                      <p class="feedback-date">5 days ago</p>
+                    </div>
+                    <div class="customer-feedback-item">
+                      <div class="feedback-header">
+                        <div class="feedback-customer">
+                          <img
+                            src="https://i.pravatar.cc/30?img=8"
+                            alt="Customer"
+                          />
+                          <span>Anand Patel</span>
+                        </div>
+                        <div class="feedback-rating">
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                        </div>
+                      </div>
+                      <p class="feedback-text">
+                        "Your organic milk and ghee are the best in the market.
+                        My family loves the natural taste."
+                      </p>
+                      <p class="feedback-date">1 week ago</p>
+                    </div>
+                  </div>
+                  <button class="customer-view-all-feedback-btn">
+                    View All Feedback
+                  </button>
+                </div>
+
+                <!-- Sentiment Analysis -->
+                <div class="customer-feedback-card">
+                  <h4>Feedback Sentiment Analysis</h4>
+                  <div class="customer-feedback-chart-container">
+                    <canvas id="sentimentAnalysisChart"></canvas>
+                  </div>
+                  <div class="sentiment-summary">
+                    <div class="sentiment-item positive">
+                      <div class="sentiment-label">Positive</div>
+                      <div class="sentiment-value">78%</div>
+                    </div>
+                    <div class="sentiment-item neutral">
+                      <div class="sentiment-label">Neutral</div>
+                      <div class="sentiment-value">15%</div>
+                    </div>
+                    <div class="sentiment-item negative">
+                      <div class="sentiment-label">Negative</div>
+                      <div class="sentiment-value">7%</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Distribution Channels Tab -->
+          <div id="distribution-channels" class="sales-tab-pane">
+            <!-- Distribution Channels Header Controls -->
+            <div class="distribution-controls-container">
+              <div class="distribution-period-selector">
+                <label>Time Period:</label>
+                <div class="distribution-period-buttons">
+                  <button class="distribution-period-btn" data-period="30">
+                    Last 30 Days
+                  </button>
+                  <button
+                    class="distribution-period-btn active"
+                    data-period="90"
+                  >
+                    Last 90 Days
+                  </button>
+                  <button class="distribution-period-btn" data-period="180">
+                    Last 6 Months
+                  </button>
+                  <button class="distribution-period-btn" data-period="365">
+                    Last Year
+                  </button>
+                </div>
+              </div>
+              <div class="distribution-type-selector">
+                <label>Channel Type:</label>
+                <select class="distribution-type-select">
+                  <option value="all">All Channels</option>
+                  <option value="direct">Direct Sales</option>
+                  <option value="retail">Retail Partners</option>
+                  <option value="wholesale">Wholesale</option>
+                  <option value="online">Online/E-commerce</option>
+                </select>
+              </div>
+              <div class="distribution-actions">
+                <button class="distribution-export-btn">
+                  <i class="fas fa-download"></i> Export Report
+                </button>
+              </div>
+            </div>
+
+            <!-- Distribution Overview Cards -->
+            <div class="distribution-overview-cards">
+              <div class="distribution-card">
+                <div class="distribution-card-icon">
+                  <i class="fas fa-truck"></i>
+                </div>
+                <div class="distribution-card-content">
+                  <h4>Total Distribution Volume</h4>
+                  <p class="distribution-card-value">325,750 L</p>
+                  <div class="distribution-card-trend positive">
+                    <i class="fas fa-arrow-up"></i>
+                    <span>14.2%</span>
+                  </div>
+                </div>
+              </div>
+              <div class="distribution-card">
+                <div class="distribution-card-icon">
+                  <i class="fas fa-store"></i>
+                </div>
+                <div class="distribution-card-content">
+                  <h4>Active Channels</h4>
+                  <p class="distribution-card-value">42</p>
+                  <div class="distribution-card-trend positive">
+                    <i class="fas fa-arrow-up"></i>
+                    <span>5.3%</span>
+                  </div>
+                </div>
+              </div>
+              <div class="distribution-card">
+                <div class="distribution-card-icon">
+                  <i class="fas fa-route"></i>
+                </div>
+                <div class="distribution-card-content">
+                  <h4>Distribution Efficiency</h4>
+                  <p class="distribution-card-value">92.8%</p>
+                  <div class="distribution-card-trend positive">
+                    <i class="fas fa-arrow-up"></i>
+                    <span>2.5%</span>
+                  </div>
+                </div>
+              </div>
+              <div class="distribution-card">
+                <div class="distribution-card-icon">
+                  <i class="fas fa-rupee-sign"></i>
+                </div>
+                <div class="distribution-card-content">
+                  <h4>Avg. Distribution Cost</h4>
+                  <p class="distribution-card-value">₹4.25/L</p>
+                  <div class="distribution-card-trend negative">
+                    <i class="fas fa-arrow-down"></i>
+                    <span>1.8%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Distribution Channel Performance -->
+            <div class="distribution-performance-container">
+              <div class="distribution-section-header">
+                <h3>Channel Performance</h3>
+                <div class="distribution-view-toggle">
+                  <button
+                    class="distribution-view-btn active"
+                    data-view="volume"
+                  >
+                    Volume
+                  </button>
+                  <button class="distribution-view-btn" data-view="revenue">
+                    Revenue
+                  </button>
+                </div>
+              </div>
+              <div class="distribution-chart-container">
+                <canvas id="distributionChannelChart"></canvas>
+              </div>
+            </div>
+
+            <!-- Distribution Channel Mix and Geographic Reach -->
+            <div class="distribution-grid">
+              <!-- Channel Mix -->
+              <div class="distribution-mix-container">
+                <div class="distribution-section-header">
+                  <h3>Distribution Channel Mix</h3>
+                </div>
+                <div class="distribution-mix-chart-container">
+                  <canvas id="distributionMixChart"></canvas>
+                </div>
+                <div class="distribution-mix-legend">
+                  <div class="distribution-mix-item">
+                    <span class="distribution-mix-color direct"></span>
+                    <div class="distribution-mix-info">
+                      <p class="distribution-mix-name">Direct Sales</p>
+                      <p class="distribution-mix-value">25%</p>
+                    </div>
+                  </div>
+                  <div class="distribution-mix-item">
+                    <span class="distribution-mix-color retail"></span>
+                    <div class="distribution-mix-info">
+                      <p class="distribution-mix-name">Retail Partners</p>
+                      <p class="distribution-mix-value">35%</p>
+                    </div>
+                  </div>
+                  <div class="distribution-mix-item">
+                    <span class="distribution-mix-color wholesale"></span>
+                    <div class="distribution-mix-info">
+                      <p class="distribution-mix-name">Wholesale</p>
+                      <p class="distribution-mix-value">30%</p>
+                    </div>
+                  </div>
+                  <div class="distribution-mix-item">
+                    <span class="distribution-mix-color online"></span>
+                    <div class="distribution-mix-info">
+                      <p class="distribution-mix-name">Online/E-commerce</p>
+                      <p class="distribution-mix-value">10%</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Geographic Reach -->
+              <div class="distribution-geo-container">
+                <div class="distribution-section-header">
+                  <h3>Geographic Distribution</h3>
+                </div>
+                <div class="distribution-geo-tabs">
+                  <button class="distribution-geo-tab active" data-tab="region">
+                    By Region
+                  </button>
+                  <button class="distribution-geo-tab" data-tab="state">
+                    By State
+                  </button>
+                  <button class="distribution-geo-tab" data-tab="city">
+                    By City
+                  </button>
+                </div>
+                <div class="distribution-geo-content">
+                  <div
+                    id="region-tab"
+                    class="distribution-geo-tab-content active"
+                  >
+                    <div class="distribution-geo-chart-container">
+                      <canvas id="distributionRegionChart"></canvas>
+                    </div>
+                  </div>
+                  <div id="state-tab" class="distribution-geo-tab-content">
+                    <div class="distribution-geo-chart-container">
+                      <canvas id="distributionStateChart"></canvas>
+                    </div>
+                  </div>
+                  <div id="city-tab" class="distribution-geo-tab-content">
+                    <div class="distribution-geo-chart-container">
+                      <canvas id="distributionCityChart"></canvas>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Distribution Metrics Analysis -->
+            <div class="distribution-metrics-container">
+              <div class="distribution-section-header">
+                <h3>Distribution Metrics Analysis</h3>
+              </div>
+              <div class="distribution-metrics-grid">
+                <!-- Delivery Time -->
+                <div class="distribution-metrics-card">
+                  <h4>Average Delivery Time</h4>
+                  <div class="distribution-metrics-chart-container">
+                    <canvas id="deliveryTimeChart"></canvas>
+                  </div>
+                </div>
+
+                <!-- Order Fulfillment -->
+                <div class="distribution-metrics-card">
+                  <h4>Order Fulfillment Rate</h4>
+                  <div class="distribution-metrics-chart-container">
+                    <canvas id="orderFulfillmentChart"></canvas>
+                  </div>
+                </div>
+
+                <!-- Product Freshness -->
+                <div class="distribution-metrics-card">
+                  <h4>Product Freshness</h4>
+                  <div class="distribution-metrics-chart-container">
+                    <canvas id="productFreshnessChart"></canvas>
+                  </div>
+                </div>
+
+                <!-- Distribution Cost -->
+                <div class="distribution-metrics-card">
+                  <h4>Distribution Cost Analysis</h4>
+                  <div class="distribution-metrics-chart-container">
+                    <canvas id="distributionCostChart"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Distribution Partners Table -->
+            <div class="distribution-partners-container">
+              <div class="distribution-section-header">
+                <h3>Distribution Partners</h3>
+                <div class="distribution-partners-actions">
+                  <select class="distribution-partners-filter">
+                    <option value="volume">By Volume</option>
+                    <option value="revenue">By Revenue</option>
+                    <option value="growth">By Growth</option>
+                  </select>
+                  <button class="distribution-view-all-btn">
+                    View All Partners
+                  </button>
+                </div>
+              </div>
+              <div class="distribution-table-wrapper">
+                <table class="distribution-table">
+                  <thead>
+                    <tr>
+                      <th>Partner</th>
+                      <th>Type</th>
+                      <th>Location</th>
+                      <th>Volume (L)</th>
+                      <th>Revenue</th>
+                      <th>Growth</th>
+                      <th>Fulfillment Rate</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div class="partner-name">
+                          <div class="partner-avatar">
+                            <img
+                              src="https://i.pravatar.cc/40?img=11"
+                              alt="Partner"
+                            />
+                          </div>
+                          <div>
+                            <p class="partner-title">Metro Supermarkets</p>
+                            <p class="partner-subtitle">Since Jan 2019</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td>Retail</td>
+                      <td>Multiple Cities</td>
+                      <td>45,250</td>
+                      <td>₹22,62,500</td>
+                      <td class="positive">+18.5%</td>
+                      <td>98.2%</td>
+                      <td><span class="partner-status active">Active</span></td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="partner-name">
+                          <div class="partner-avatar">
+                            <img
+                              src="https://i.pravatar.cc/40?img=12"
+                              alt="Partner"
+                            />
+                          </div>
+                          <div>
+                            <p class="partner-title">Sunshine Hotels Group</p>
+                            <p class="partner-subtitle">Since Mar 2020</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td>Direct</td>
+                      <td>Bangalore</td>
+                      <td>32,800</td>
+                      <td>₹16,40,000</td>
+                      <td class="positive">+12.3%</td>
+                      <td>99.5%</td>
+                      <td><span class="partner-status active">Active</span></td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="partner-name">
+                          <div class="partner-avatar">
+                            <img
+                              src="https://i.pravatar.cc/40?img=13"
+                              alt="Partner"
+                            />
+                          </div>
+                          <div>
+                            <p class="partner-title">Dairy Direct Online</p>
+                            <p class="partner-subtitle">Since Jun 2021</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td>Online</td>
+                      <td>Pan India</td>
+                      <td>28,500</td>
+                      <td>₹14,25,000</td>
+                      <td class="positive">+25.8%</td>
+                      <td>97.3%</td>
+                      <td><span class="partner-status active">Active</span></td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="partner-name">
+                          <div class="partner-avatar">
+                            <img
+                              src="https://i.pravatar.cc/40?img=14"
+                              alt="Partner"
+                            />
+                          </div>
+                          <div>
+                            <p class="partner-title">
+                              Regional Distributors Ltd
+                            </p>
+                            <p class="partner-subtitle">Since Aug 2018</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td>Wholesale</td>
+                      <td>Chennai</td>
+                      <td>38,750</td>
+                      <td>₹19,37,500</td>
+                      <td class="positive">+8.2%</td>
+                      <td>96.8%</td>
+                      <td><span class="partner-status active">Active</span></td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="partner-name">
+                          <div class="partner-avatar">
+                            <img
+                              src="https://i.pravatar.cc/40?img=15"
+                              alt="Partner"
+                            />
+                          </div>
+                          <div>
+                            <p class="partner-title">Fresh Foods Market</p>
+                            <p class="partner-subtitle">Since Feb 2020</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td>Retail</td>
+                      <td>Mumbai</td>
+                      <td>22,150</td>
+                      <td>₹11,07,500</td>
+                      <td class="negative">-2.5%</td>
+                      <td>94.2%</td>
+                      <td>
+                        <span class="partner-status inactive">Inactive</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="distribution-table-pagination">
+                <button class="distribution-pagination-btn" disabled>
+                  <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="distribution-pagination-btn active">1</button>
+                <button class="distribution-pagination-btn">2</button>
+                <button class="distribution-pagination-btn">3</button>
+                <button class="distribution-pagination-btn">
+                  <i class="fas fa-chevron-right"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Distribution Optimization -->
+            <div class="distribution-optimization-container">
+              <div class="distribution-section-header">
+                <h3>Distribution Optimization</h3>
+              </div>
+              <div class="distribution-optimization-grid">
+                <!-- Route Efficiency -->
+                <div class="distribution-optimization-card">
+                  <div class="distribution-optimization-header">
+                    <h4>Route Efficiency</h4>
+                    <div class="distribution-efficiency-score">
+                      <span class="score-value">87%</span>
+                      <div class="efficiency-gauge">
+                        <div class="efficiency-fill" style="width: 87%"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="distribution-optimization-content">
+                    <p>
+                      Current average route efficiency across all distribution
+                      channels.
+                    </p>
+                    <div class="optimization-metrics">
+                      <div class="optimization-metric">
+                        <span class="metric-label">Avg. Distance</span>
+                        <span class="metric-value">42 km</span>
+                      </div>
+                      <div class="optimization-metric">
+                        <span class="metric-label">Fuel Usage</span>
+                        <span class="metric-value">8.2 L/100km</span>
+                      </div>
+                      <div class="optimization-metric">
+                        <span class="metric-label">Time Efficiency</span>
+                        <span class="metric-value">92%</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Vehicle Utilization -->
+                <div class="distribution-optimization-card">
+                  <h4>Vehicle Utilization</h4>
+                  <div class="distribution-optimization-chart-container">
+                    <canvas id="vehicleUtilizationChart"></canvas>
+                  </div>
+                </div>
+
+                <!-- Delivery Schedule Adherence -->
+                <div class="distribution-optimization-card">
+                  <h4>Delivery Schedule Adherence</h4>
+                  <div class="distribution-optimization-chart-container">
+                    <canvas id="scheduleAdherenceChart"></canvas>
+                  </div>
+                </div>
+
+                <!-- Optimization Recommendations -->
+                <div class="distribution-optimization-card recommendations">
+                  <h4>Optimization Recommendations</h4>
+                  <div class="optimization-recommendations-list">
+                    <div class="optimization-recommendation-item">
+                      <div class="recommendation-icon high">
+                        <i class="fas fa-exclamation-circle"></i>
+                      </div>
+                      <div class="recommendation-content">
+                        <p class="recommendation-title">
+                          Optimize South Mumbai Routes
+                        </p>
+                        <p class="recommendation-text">
+                          Consolidate deliveries to reduce travel distance by an
+                          estimated 15%.
+                        </p>
+                        <p class="recommendation-impact">
+                          Potential Savings: ₹12,500/month
+                        </p>
+                      </div>
+                    </div>
+                    <div class="optimization-recommendation-item">
+                      <div class="recommendation-icon medium">
+                        <i class="fas fa-info-circle"></i>
+                      </div>
+                      <div class="recommendation-content">
+                        <p class="recommendation-title">
+                          Increase Vehicle Capacity Utilization
+                        </p>
+                        <p class="recommendation-text">
+                          Current utilization is 78%. Aim for 85% by better load
+                          planning.
+                        </p>
+                        <p class="recommendation-impact">
+                          Potential Savings: ₹8,200/month
+                        </p>
+                      </div>
+                    </div>
+                    <div class="optimization-recommendation-item">
+                      <div class="recommendation-icon low">
+                        <i class="fas fa-lightbulb"></i>
+                      </div>
+                      <div class="recommendation-content">
+                        <p class="recommendation-title">
+                          Adjust Delivery Windows
+                        </p>
+                        <p class="recommendation-text">
+                          Shift non-urgent deliveries to off-peak hours to
+                          reduce transit time.
+                        </p>
+                        <p class="recommendation-impact">
+                          Potential Savings: ₹5,800/month
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!--Inventory and supply Section -->
@@ -3406,9 +5135,6 @@
         <section class="inventorys-section">
           <div class="section-header">
             <h3><i class="fas fa-boxes"></i> Inventory Overview</h3>
-            <button class="btn btn-primary" id="refreshInventory">
-              <i class="fas fa-sync-alt"></i> Refresh Data
-            </button>
           </div>
 
           <div class="card-grid">
